@@ -70,7 +70,6 @@ namespace WebAppPortfolio.Controllers
         public async Task<JsonResult> GetSpotifyAudioFeaturesAsync(string id)
         {
             var features = new JObject();
-            //var trackId = "06AKEBrKUckW0KREUWRnvT";
             var uri = new Uri("https://api.spotify.com/v1/audio-features/" + id);
             JsonResult response = await SendAsyncSpotifyQuery(uri);
 
