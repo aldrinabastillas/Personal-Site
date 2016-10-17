@@ -1,0 +1,33 @@
+﻿@{
+    Layout = null;
+    @Scripts.Render("~/bundles/angular")
+}
+
+<!DOCTYPE html>
+<html ng-app="spotifyApp">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Billboard Top 100 Predictor</title>
+    <script src="/Scripts/Spotify/Spotify.js" type="text/javascript"></script>
+</head>
+<body>
+    <div ng-controller="SpotifyController as spotify">
+        <div class="row">
+            @*<div class="col-sm-4">
+                    <input type="text" ng-model="searchTerm"
+                           class="form-control" placeholder="Search for...">
+                </div>
+                <div class="col-sm-4">
+                    <button type="button" class="btn btn-default btn-md">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    </button>
+                </div>*@
+            <form ng-submit="spotify.Search(searchTerm)">
+                <input type="text" ng-model="searchTerm"
+                       placeholder="input trackId" />
+                <input class="btn-success" type="submit" value="Search" />
+            </form>
+        </div>
+    </div>
+</body>
+</html>
