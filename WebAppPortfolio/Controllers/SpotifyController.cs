@@ -20,6 +20,7 @@ namespace WebAppPortfolio.Controllers
 {
     public class SpotifyController : Controller
     {
+        #region Public Actions
         /// <summary>
         /// 
         /// </summary>
@@ -52,16 +53,26 @@ namespace WebAppPortfolio.Controllers
 
             return Json(response, JsonRequestBehavior.AllowGet);
         }
+        #endregion
 
+        #region Private Machine Learning Methods
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         private static async Task<string> CallMlService(PredictionRequest request)
         {
             string result = string.Empty;
             using (var client = new HttpClient())
             {
-                string apiKey = WebConfigurationManager.AppSettings["AzureMlApiKey"];
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
-                client.BaseAddress = new Uri("https://ussouthcentral.services.azureml.net/workspaces/90569c39ed404120800dca5909257988/services/96fe7ad3758848b8a322f7be55dd6c9c/execute?api-version=2.0&format=swagger");
+                //string apiKey = WebConfigurationManager.AppSettings["AucModelApiKey"];
+                //client.BaseAddress = new Uri(WebConfigurationManager.AppSettings["AucModelUri"] + "&format=swagger");
 
+                string apiKey = WebConfigurationManager.AppSettings["F1ModelApiKey"];
+                client.BaseAddress = new Uri(WebConfigurationManager.AppSettings["F1ModelUri"] + "&format=swagger");
+
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
                 HttpResponseMessage response = await client.PostAsJsonAsync("", request).ConfigureAwait(false);
 
                 if (response.IsSuccessStatusCode)
@@ -76,34 +87,9 @@ namespace WebAppPortfolio.Controllers
             }
             return result;
         }
+        #endregion
 
         #region Private Spotify Methods
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="song"></param>
-        /// <param name="artist"></param>
-        /// <returns></returns>
-        private static async Task<string> SearchTrackIdAsync(string song, string artist)
-        {
-            string query = "?q=track:" + ParseSearchString(song) +
-                           "%20artist:" + ParseSearchString(artist) +
-                           "&type=track";
-            Uri uri = new Uri("https://api.spotify.com/v1/search" + query);
-
-            string trackId = string.Empty;
-            //JObject response = await SendAsyncSpotifyQuery(uri);
-
-            //JToken results = response.SelectToken("$.tracks.total");
-            //if (results.ToString() != null && Convert.ToInt32(results.ToString()) > 0)
-            //{
-            //    JToken id = response.SelectToken("$.tracks.items[0].id");
-            //    trackId = id.ToString();
-            //}
-
-            return trackId;
-        }
-
         /// <summary>
         /// See https://developer.spotify.com/web-api/get-audio-features/
         /// Calls https://api.spotify.com/v1/audio-features/{id}
@@ -251,25 +237,6 @@ namespace WebAppPortfolio.Controllers
                 }
                 return accessToken;
             }
-        }
-        #endregion
-
-        #region Misc. Private Helper Methods
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="raw"></param>
-        /// <returns></returns>
-        private static string ParseSearchString(string raw)
-        {
-            raw.Replace('#', ' ');
-            if (raw.Contains(" feat."))
-            {
-                string[] stringSeperator = new string[] { "feat." };
-                string[] temp = raw.Split(stringSeperator, StringSplitOptions.None);
-                return temp[0];
-            }
-            return raw;
         }
         #endregion
 

@@ -50,9 +50,9 @@ namespace WebAppPortfolio.Models
                 {
                     "Valence", GetTokenValue(obj, "valence")
                 },
-                {
-                    "Tempo", GetTokenValue(obj, "tempo")
-                },
+                //{
+                //    "Tempo", GetTokenValue(obj, "tempo") //used with the AUC optimized model
+                //},
                 {
                     "Duration", GetTokenValue(obj, "duration_ms")
                 },
