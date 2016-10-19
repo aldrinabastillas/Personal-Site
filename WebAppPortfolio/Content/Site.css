@@ -23,3 +23,13 @@ textarea {
     max-width: 280px;
 }
 
+/*Center align everything in the #billboardLists table
+    execpt for data in the first column */
+#billboardLists th,
+#billboardLists td{
+    text-align: center;
+}
+
+#billboardLists td:first-child{
+    text-align: left;
+}
