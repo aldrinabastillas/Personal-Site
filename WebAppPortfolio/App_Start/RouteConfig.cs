@@ -14,10 +14,26 @@ namespace WebAppPortfolio
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "GetYearList",
+                url: "Spotify/GetYearList/{year}",
+                defaults: new {
+                    controller = "Spotify",
+                    action = "GetYearList",
+                    year = DateTime.Now.Year - 2
+                }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new {
+                    controller = "Home",
+                    action = "Index",
+                    id = UrlParameter.Optional
+                }
             );
+
+            
         }
     }
 }

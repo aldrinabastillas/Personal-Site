@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    font-family: SourceSansPro
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -23,6 +24,11 @@ textarea {
     max-width: 280px;
 }
 
+#billboardLists{
+    overflow: scroll;
+    height: 250px;
+}
+
 /*Center align everything in the #billboardLists table
     execpt for data in the first column */
 #billboardLists th,
@@ -32,4 +38,9 @@ textarea {
 
 #billboardLists td:first-child{
     text-align: left;
+}
+
+@font-face{
+    font-family: 'SourceSansPro';
+    src: url('../fonts/SourceSansPro-Light.otf') format('opentype');
 }

@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SpotifySongsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SpotifySongs.dbo.Billboard100' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Billboard100">
+          <Key>
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="Position" />
+            <PropertyRef Name="Song" />
+            <PropertyRef Name="Artist" />
+          </Key>
+          <Property Name="Year" Type="int" Nullable="false" />
+          <Property Name="Position" Type="int" Nullable="false" />
+          <Property Name="Song" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Artist" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="SpotifySongsModelStoreContainer">
+          <EntitySet Name="Billboard100" EntityType="Self.Billboard100" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Billboard100].[Year] AS [Year], 
+    [Billboard100].[Position] AS [Position], 
+    [Billboard100].[Song] AS [Song], 
+    [Billboard100].[Artist] AS [Artist]
+    FROM [dbo].[Billboard100] AS [Billboard100]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SpotifySongsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Billboard100Song">
+          <Key>
+            <PropertyRef Name="Year" />
+            <PropertyRef Name="Position" />
+            <PropertyRef Name="Song" />
+            <PropertyRef Name="Artist" />
+          </Key>
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <Property Name="Position" Type="Int32" Nullable="false" />
+          <Property Name="Song" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Artist" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="Billboard100Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Billboard100Song" EntityType="SpotifySongsModel.Billboard100Song" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SpotifySongsModelStoreContainer" CdmEntityContainer="Billboard100Entities">
+          <EntitySetMapping Name="Billboard100Song">
+            <EntityTypeMapping TypeName="SpotifySongsModel.Billboard100Song">
+              <MappingFragment StoreEntitySet="Billboard100">
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Song" ColumnName="Song" />
+                <ScalarProperty Name="Artist" ColumnName="Artist" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

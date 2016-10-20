@@ -1,9 +1,15 @@
 ﻿angular.module('spotifyApp', [])
-    .run(function () {
-        $('#predictionText').hide(); //hide prediction upon loading page
-    })
     .controller('SpotifyController', ['$scope', '$http', function ($scope, $http) {
         var spotify = this;
+
+        $('#predictionText').hide(); //hide prediction upon loading page
+
+        spotify.availableYears = [];
+        var currentYear = new Date().getFullYear();
+        for (i = 1946; i < currentYear - 1; i++) {
+            spotify.availableYears.push(i);
+        };
+        spotify.selectedYear = spotify.availableYears[spotify.availableYears.length - 1]; //default in the most recent year
 
         spotify.songSearch = $('#songSearch').search({
             apiSettings: {
@@ -34,19 +40,18 @@
             },
             minCharacters: 3,
             onSelect(result, response) { //callback after song is selcted
-                spotify.IdSearch(result.id);
+                spotify.getPrediction(result.id);
                 $scope.selectedSong = result.title;
                 $scope.selectedArtist = result.description;
 
                 var url = 'https://embed.spotify.com/?uri=spotify:track:' + result.id;
                 $('#spotifyPlayer').attr('src', url); //change song in the player
+                //$('#play-button').click(); //not supported
             }
         });
 
-        spotify.IdSearch = function (searchTerm) {
-            var id = searchTerm;
-
-            $http.get('GetPrediction/' + id)
+        spotify.getPrediction = function (songId) {
+            $http.get('GetPrediction/' + songId)
                 .success(function (response, status) {
                     var obj = JSON.parse(response);
                     var label = obj.Results.output1[0]['Scored Labels'];
@@ -67,6 +72,34 @@
                     $('#predictionText').show();
                 });
         };
+
+        spotify.billboardListCache = {};
+        spotify.billboardSongs = [];
+        spotify.getYearList = function (selectedYear) {
+            if (spotify.billboardListCache[selectedYear] !== undefined) {
+                spotify.billboardSongs = spotify.billboardListCache[selectedYear];
+            }
+            else {
+                $http.get('GetYearList/' + selectedYear)
+                .success(function (response, status) {
+                    var songs = [];
+                    $.each(response, function (index, item) {
+                        songs.push({
+                            Position: item.Position,
+                            Song: item.Song,
+                            Artist: item.Artist
+                        });
+                    });
+                    spotify.billboardListCache[selectedYear] = songs; //add to cache
+                    spotify.billboardSongs = songs; //update currently displayed list
+                    //spotify.billboardSongs.push({
+                    //    year: selectedYear,
+                    //    songs: songs
+                    //});
+                });
+            }     
+        };
+
 }]);
 
 

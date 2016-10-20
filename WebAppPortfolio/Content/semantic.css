@@ -523,7 +523,7 @@ html {
   font-size: 14px;
 }
 
-body {
+body { /*AFA - Edited*/
   margin: 0px;
   padding: 0px;
   overflow-x: hidden;

@@ -53,6 +53,31 @@ namespace WebAppPortfolio.Controllers
 
             return Json(response, JsonRequestBehavior.AllowGet);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="year"></param>
+        /// <returns></returns>
+        public JsonResult GetYearList(int year)
+        {
+            var list = new List<Billboard100Song>();
+            using (var db = new Billboard100Entities())
+            {
+                try
+                {
+                    list = (from songs in db.Billboard100Song
+                            where songs.Year == year
+                            select songs).OrderBy(s => s.Position).ToList();
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex.InnerException);
+                }
+
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         #region Private Machine Learning Methods
