@@ -1,16 +1,21 @@
 ﻿angular.module('spotifyApp', [])
+    .run(function () {
+        //$('#predictionText').css('visibility', 'hidden'); //hide prediction upon loading page
+        $('table').tablesort(); //sets up a sortable table
+        //see http://semantic-ui.com/collections/table.html#sortable
+    })
     .controller('SpotifyController', ['$scope', '$http', function ($scope, $http) {
         var spotify = this;
 
-        $('#predictionText').hide(); //hide prediction upon loading page
-
+        //populate year dropdown
         spotify.availableYears = [];
         var currentYear = new Date().getFullYear();
-        for (i = 1946; i < currentYear - 1; i++) {
+        for (i = currentYear - 1; i >= 1946; i--) {
             spotify.availableYears.push(i);
         };
-        spotify.selectedYear = spotify.availableYears[spotify.availableYears.length - 1]; //default in the most recent year
+        spotify.selectedYear = spotify.availableYears[0]; //default in the most recent year
 
+        //free text search songs in Spotify
         spotify.songSearch = $('#songSearch').search({
             apiSettings: {
                 url: 'https://api.spotify.com/v1/search?q={query}&type=track',
@@ -50,9 +55,17 @@
             }
         });
 
+        //gets a prediction for a song
         spotify.getPrediction = function (songId) {
             $http.get('GetPrediction/' + songId)
                 .success(function (response, status) {
+                    $('#searchHelp').fadeOut('fast');
+                    if (response.startsWith("Try again:")) {
+                        $scope.errorText = response;
+                        $('#errorText').css('display', 'initial');
+                        return;
+                    }
+
                     var obj = JSON.parse(response);
                     var label = obj.Results.output1[0]['Scored Labels'];
                     var probability = obj.Results.output1[0]['Scored Probabilities'] * 100;
@@ -65,14 +78,15 @@
 
                     $scope.prediction = prediction;
                     $scope.probability = probability.toFixed(2) + '%';
-                    $('#predictionText').show();
+                    $('#predictionText').css('visibility', 'visible');
                 })
                 .error(function (response, status) {
-                    $scope.label = 'Request failed';
-                    $('#predictionText').show();
+                    $scope.errorText = response;
+                    $('#errorText').css('visibility', 'visible');
                 });
         };
 
+        //get Billboard Top 100 songs from a past year
         spotify.billboardListCache = {};
         spotify.billboardSongs = [];
         spotify.getYearList = function (selectedYear) {
@@ -91,15 +105,20 @@
                         });
                     });
                     spotify.billboardListCache[selectedYear] = songs; //add to cache
-                    spotify.billboardSongs = songs; //update currently displayed list
-                    //spotify.billboardSongs.push({
-                    //    year: selectedYear,
-                    //    songs: songs
-                    //});
+                    spotify.billboardSongs = null;
+                    spotify.billboardSongs = songs;
                 });
-            }     
+            }
         };
 
-}]);
+        //invoke upon page load
+        spotify.getYearList(spotify.selectedYear);
+
+        //TODO: Implement an error handler
+        //$('#spotifyPlayer').error(function () {
+        //    $('#spotifyPlayer').append('<p>Spotify Web Player unable to load</p>');
+        //});
+
+    }]);
 
 

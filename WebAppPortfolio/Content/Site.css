@@ -1,46 +1,30 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-    font-family: SourceSansPro
+﻿/*My Edits*/
+.ui.icon.input, .results {
+    min-width: 100%;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+/*TODO: don't hard code heights */
+#predictionSection{
+    min-height: 414px;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+#billboardTable {
+    overflow-y: scroll;
+    max-height: 339px;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+#yearDropdown {
+    color: black;
 }
 
-#billboardLists{
-    overflow: scroll;
-    height: 250px;
+#errorText{
+    display: none;
 }
 
-/*Center align everything in the #billboardLists table
-    execpt for data in the first column */
-#billboardLists th,
-#billboardLists td{
+#predictionText {
+    visibility: hidden; /*Default to hidden as JS is too slow upon loading*/
     text-align: center;
+    line-height: 150%;
 }
 
-#billboardLists td:first-child{
-    text-align: left;
-}
 
-@font-face{
-    font-family: 'SourceSansPro';
-    src: url('../fonts/SourceSansPro-Light.otf') format('opentype');
-}

@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -25,6 +26,7 @@ namespace WebAppPortfolio.Controllers
         /// 
         /// </summary>
         /// <returns></returns>
+        /// 
         public ActionResult Index()
         {
             string accessToken = GetSpotifyAccessToken();
@@ -46,10 +48,17 @@ namespace WebAppPortfolio.Controllers
             Task<JObject> audioFeatures = GetSpotifyAudioFeaturesAsync(id);
             Task<int> trackYear = GetTrackReleaseYear(id);
             await Task.WhenAll(audioFeatures, trackYear);
-            
-            var scoreRequest = PredictionRequest.CreateRequest(audioFeatures.Result, trackYear.Result);
 
-            string response = await CallMlService(scoreRequest);
+            string response;
+            if(audioFeatures.Result != null && trackYear.Result != 0)
+            {
+                var scoreRequest = PredictionRequest.CreateRequest(audioFeatures.Result, trackYear.Result);
+                response = await CallMlService(scoreRequest);
+            }
+            else
+            {
+                response = "Try again: Spotify Web APIs returned an error";
+            }
 
             return Json(response, JsonRequestBehavior.AllowGet);
         }
@@ -106,8 +115,8 @@ namespace WebAppPortfolio.Controllers
                 }
                 else
                 {
-                    //Console.WriteLine("Failed with status code: {0}", response.StatusCode);
-                    result = "Error in calling prediction service, try again.";
+                    Console.WriteLine("Failed with status code: {0}", response.StatusCode);
+                    result = "Try again: Microsoft Azure Machine Learning web service returned an error.";
                 }
             }
             return result;
@@ -199,7 +208,6 @@ namespace WebAppPortfolio.Controllers
                 }
                 catch (WebException ex)
                 {
-                    Console.WriteLine(ex.Message);
                     HttpWebResponse httpResponse = (HttpWebResponse)ex.Response;
                     if (httpResponse.StatusDescription.Contains("Too Many Requests"))
                     {
@@ -210,6 +218,10 @@ namespace WebAppPortfolio.Controllers
                         Thread.Sleep(seconds * 1000);
                         Console.WriteLine("Retrying");
                         return await SendAsyncSpotifyQuery(uri);
+                    }
+                    else
+                    {
+                        Trace.WriteLine(ex); //write to errors.xml file specified in Web.config
                     }
                 }
             }
@@ -258,7 +270,7 @@ namespace WebAppPortfolio.Controllers
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception(ex.Message + " in GetAccessToken()");
+                    Trace.WriteLine(ex); //write to errors.xml file specified in Web.config
                 }
                 return accessToken;
             }
