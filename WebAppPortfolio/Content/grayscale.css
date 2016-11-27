@@ -18,8 +18,7 @@ html {
     height: 100%;
 }
 
-h1, h2, h3,
-h4, h5, h6 {
+h1, h2, h3, h4, h5, h6 {
     margin: 0 0 35px;
     text-transform: uppercase;
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -49,9 +48,9 @@ a {
     transition: all 0.2s ease-in-out;
 }
 
-    a:hover,
-    a:focus {
+    a:hover, a:focus {
         color: #42DCA3;
+        text-decoration: none;
     }
 /*#endregion General Styles*/
 
@@ -62,6 +61,8 @@ a {
     text-transform: uppercase;
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: black;
+    outline: none;
+    color: white;
 }
 
     .navbar-custom .navbar-toggle {
@@ -70,22 +71,9 @@ a {
         font-size: 12px;
     }
 
-        .navbar-custom .navbar-toggle:focus,
-        .navbar-custom .navbar-toggle:active {
-            outline: none;
-        }
-
     .navbar-custom .navbar-brand {
         font-weight: 700;
         display: none;
-    }
-
-        .navbar-custom .navbar-brand:focus {
-            outline: none;
-        }
-
-    .navbar-custom a {
-        color: white;
     }
 
     .navbar-custom .nav li a {
@@ -94,29 +82,14 @@ a {
         transition: background 0.3s ease-in-out;
     }
 
-        .navbar-custom .nav li a:hover {
-            color: rgba(255, 255, 255, 0.8);
-            outline: none;
-            background-color: transparent;
-        }
-
+        .navbar-custom .nav li a:hover, 
         .navbar-custom .nav li a:focus,
-        .navbar-custom .nav li a:active {
-            outline: none;
+        .navbar-custom .nav li a:active,
+        .navbar-custom .nav li.active a,
+        .navbar-custom .nav li.active a:hover {
+            color: #42DCA3;
             background-color: transparent;
         }
-
-    .navbar-custom .nav li.active {
-        outline: none;
-    }
-
-        .navbar-custom .nav li.active a {
-            background-color: rgba(255, 255, 255, 0.3);
-        }
-
-            .navbar-custom .nav li.active a:hover {
-                color: white;
-            }
 
 @media (min-width: 768px) {
     .navbar-custom {
@@ -132,7 +105,6 @@ a {
         .navbar-custom.top-nav-collapse {
             padding: 0;
             background: black;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
         }
 
             .navbar-custom.top-nav-collapse .navbar-brand {
@@ -157,10 +129,10 @@ a {
     -o-background-size: cover;
 }
 
-    .intro .intro-header {
-        display: table-cell;
-        vertical-align: middle;
-    }
+.intro-header {
+    display: table-cell;
+    vertical-align: middle;
+}
 
         .intro .intro-header .brand-heading {
             font-size: 40px;
@@ -245,22 +217,9 @@ a {
     .btn:hover, .btn:focus {
         outline: none;
         color: #42DCA3;
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(66, 220, 163, 0.2);
         border-color: #42DCA3;
     }
-
-/*.btn-default {
-    border: 1px solid #42DCA3;
-    color: #42DCA3;
-    background-color: transparent;
-}*/
-
-.btn-default:hover, .btn-default:focus {
-    border: 1px solid #42DCA3;
-    outline: none;
-    color: black;
-    background-color: #42DCA3;
-}
 /*#endregion Button Class*/
 
 /*#region Contact Section*/
