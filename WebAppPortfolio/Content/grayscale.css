@@ -3,6 +3,8 @@
  * Copyright 2013-2016 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
+
+/*#region General Styles*/
 body {
     width: 100%;
     height: 100%;
@@ -23,6 +25,7 @@ h4, h5, h6 {
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 700;
     letter-spacing: 1px;
+    text-shadow: none;
 }
 
 p {
@@ -40,7 +43,7 @@ p {
 }
 
 a {
-    color: #42DCA3;
+    color: white;
     -webkit-transition: all 0.2s ease-in-out;
     -moz-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
@@ -48,14 +51,11 @@ a {
 
     a:hover,
     a:focus {
-        text-decoration: none;
-        color: #1d9b6c;
+        color: #42DCA3;
     }
+/*#endregion General Styles*/
 
-.light {
-    font-weight: 400;
-}
-
+/*#region NavBar*/
 .navbar-custom {
     margin-bottom: 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
@@ -139,7 +139,9 @@ a {
                 display: initial;
             }
 }
+/*#endregion NavBar*/
 
+/*#region Intro Header*/
 .intro {
     display: table;
     width: 100%;
@@ -155,16 +157,16 @@ a {
     -o-background-size: cover;
 }
 
-    .intro .intro-body {
+    .intro .intro-header {
         display: table-cell;
         vertical-align: middle;
     }
 
-        .intro .intro-body .brand-heading {
+        .intro .intro-header .brand-heading {
             font-size: 40px;
         }
 
-        .intro .intro-body .intro-text {
+        .intro .intro-header .intro-text {
             font-size: 18px;
         }
 
@@ -174,21 +176,23 @@ a {
         padding: 0;
     }
 
-        .intro .intro-body .brand-heading {
+        .intro .intro-header .brand-heading {
             font-size: 70px;
         }
 
-        .intro .intro-body .intro-text {
+        .intro .intro-header .intro-text {
             font-size: 26px;
         }
 }
+/*#endregion Intro Section*/
 
+/*#region Circle Button*/
 .btn-circle {
     width: 70px;
     height: 70px;
     margin-top: 15px;
     border: 2px solid white;
-    border-radius: 100% !important;
+    border-radius: 100%;
     font-size: 40px;
     color: white;
     background: transparent;
@@ -196,12 +200,6 @@ a {
     -moz-transition: background 0.3s ease-in-out;
     transition: background 0.3s ease-in-out;
 }
-
-    .btn-circle:hover, .btn-circle:focus {
-        outline: none;
-        color: white;
-        background: rgba(255, 255, 255, 0.1);
-    }
 
     .btn-circle animated {
         -webkit-transition-property: -webkit-transform;
@@ -220,45 +218,52 @@ a {
         -webkit-animation-timing-function: linear;
         -moz-animation-timing-function: linear;
     }
+/*#endregion Circle Button*/
 
-@-webkit-keyframes pulse {
-    0% {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-    }
-
-    50% {
-        -webkit-transform: scale(1.2);
-        transform: scale(1.2);
-    }
-
-    100% {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-    }
+/*#region Projects Section*/
+.projects-section {
+    padding-top: 200px;
 }
 
-@-moz-keyframes pulse {
-    0% {
-        -moz-transform: scale(1);
-        transform: scale(1);
-    }
-
-    50% {
-        -moz-transform: scale(1.2);
-        transform: scale(1.2);
-    }
-
-    100% {
-        -moz-transform: scale(1);
-        transform: scale(1);
+@media (min-width: 767px) {
+    .projects-section {
+        padding: 100px 0;
     }
 }
+/*#endregion Content Section*/
 
-.content-section {
-    padding-top: 100px;
+/*#region Button Class*/
+.btn {
+    text-transform: uppercase;
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 
+    .btn:hover, .btn:focus {
+        outline: none;
+        color: #42DCA3;
+        background: rgba(255, 255, 255, 0.1);
+        border-color: #42DCA3;
+    }
+
+/*.btn-default {
+    border: 1px solid #42DCA3;
+    color: #42DCA3;
+    background-color: transparent;
+}*/
+
+.btn-default:hover, .btn-default:focus {
+    border: 1px solid #42DCA3;
+    outline: none;
+    color: black;
+    background-color: #42DCA3;
+}
+/*#endregion Button Class*/
+
+/*#region Contact Section*/
 .contact-section {
     width: 100%;
     padding: 50px 0;
@@ -272,65 +277,13 @@ a {
 }
 
 @media (min-width: 767px) {
-    .content-section {
-        padding-top: 250px;
-    }
-
     .contact-section {
         padding: 100px 0;
     }
-
-    #map {
-        height: 400px;
-        margin-top: 250px;
-    }
 }
+/*#endregion Contact Section*/
 
-.btn {
-    text-transform: uppercase;
-    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-weight: 400;
-    -webkit-transition: all 0.3s ease-in-out;
-    -moz-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-    border-radius: 0;
-}
-
-.btn-default {
-    border: 1px solid #42DCA3;
-    color: #42DCA3;
-    background-color: transparent;
-}
-
-    .btn-default:hover, .btn-default:focus {
-        border: 1px solid #42DCA3;
-        outline: none;
-        color: black;
-        background-color: #42DCA3;
-    }
-
-ul.banner-social-buttons {
-    margin-top: 0;
-}
-
-@media (max-width: 1199px) {
-    ul.banner-social-buttons {
-        margin-top: 15px;
-    }
-}
-
-@media (max-width: 767px) {
-    ul.banner-social-buttons li {
-        display: block;
-        margin-bottom: 20px;
-        padding: 0;
-    }
-
-        ul.banner-social-buttons li:last-child {
-            margin-bottom: 0;
-        }
-}
-
+/*#region Footer*/
 footer {
     padding: 50px 0;
 }
@@ -338,7 +291,9 @@ footer {
     footer p {
         margin: 0;
     }
+/*#endregion Footer*/
 
+/*#region Selection*/
 ::-moz-selection {
     text-shadow: none;
     background: #fcfcfc;
@@ -358,7 +313,4 @@ img::selection {
 img::-moz-selection {
     background: transparent;
 }
-
-body {
-    webkit-tap-highlight-color: rgba(255, 255, 255, 0.2);
-}
+/*#endregion Selection*/
