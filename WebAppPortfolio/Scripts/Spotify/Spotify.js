@@ -1,8 +1,15 @@
 ﻿angular.module('spotifyApp', [])
     .run(function () {
-        //$('#predictionText').css('visibility', 'hidden'); //hide prediction upon loading page
-        $('table').tablesort(); //sets up a sortable table
-        //see http://semantic-ui.com/collections/table.html#sortable
+        $('table').tablesort(); //sets up a sortable table, see http://semantic-ui.com/collections/table.html#sortable
+
+        $('a[role="button"]').click(function () { //flip accordion panel arrows
+            if ($(this).attr('aria-expanded') == 'true') {
+                $(this).children('span').attr('class', 'panelArrow glyphicon glyphicon-chevron-down');
+            }
+            else {
+                $(this).children('span').attr('class', 'panelArrow glyphicon glyphicon-chevron-up');
+            }
+        });
     })
     .controller('SpotifyController', ['$scope', '$http', function ($scope, $http) {
         var spotify = this;
@@ -37,14 +44,14 @@
                     return response;
                 },
             },
-            fields: { //map results from Spotify to semantic-ui API
+            fields: { //map results from Spotify to Semantic-UI API
                 results: 'results',
                 title: 'title',
                 description: 'description',
                 image: 'image'
             },
             minCharacters: 3,
-            onSelect(result, response) { //callback after song is selcted
+            onSelect(result, response) { //callback after song is selected
                 spotify.getPrediction(result.id);
                 $scope.selectedSong = result.title;
                 $scope.selectedArtist = result.description;
@@ -87,9 +94,10 @@
         };
 
         //get Billboard Top 100 songs from a past year
-        spotify.billboardListCache = {};
+        spotify.billboardListCache = {}; //save lists that were already loaded
         spotify.billboardSongs = [];
         spotify.getYearList = function (selectedYear) {
+            //first check cache
             if (spotify.billboardListCache[selectedYear] !== undefined) {
                 spotify.billboardSongs = spotify.billboardListCache[selectedYear];
             }
@@ -111,7 +119,7 @@
             }
         };
 
-        //invoke upon page load
+        //invoke getYearList upon page load
         spotify.getYearList(spotify.selectedYear);
 
         //TODO: Implement an error handler
@@ -120,5 +128,3 @@
         //});
 
     }]);
-
-

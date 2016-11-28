@@ -605,12 +605,12 @@ p:last-child {
         Links
 --------------------*/
 
-a {
+/*a {
   color: #4183C4;
   text-decoration: none;
-}
+}*/
 
-a:hover {
+a, a:hover {
   /*color: #1e70bf;*/
   color: #42DCA3; 
   text-decoration: none;
