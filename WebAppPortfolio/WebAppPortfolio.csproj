@@ -215,8 +215,6 @@
     <Content Include="Content\Semantic-UI\semantic.min.css" />
     <Content Include="Content\Semantic-UI\semantic.min.js" />
     <Content Include="Content\Semantic-UI\themes\default\assets\fonts\icons.svg" />
-    <Content Include="Content\semantic.css" />
-    <Content Include="Content\semantic.min.css" />
     <Content Include="Models\Billboard100Songs.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Billboard100Songs.edmx</DependentUpon>
@@ -230,7 +228,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\Spotify.css" />
     <Content Include="Scripts\ai.0.22.19-build00125.js" />
     <Content Include="Scripts\ai.0.22.19-build00125.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -279,8 +277,6 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\semantic.js" />
-    <Content Include="Scripts\semantic.min.js" />
     <Content Include="Scripts\Spotify\tablesort.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Scripts\Spotify\Spotify.js" />

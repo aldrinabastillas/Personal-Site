@@ -611,7 +611,8 @@ a {
 }
 
 a:hover {
-  color: #1e70bf;
+  /*color: #1e70bf;*/
+  color: #42DCA3; 
   text-decoration: none;
 }
 

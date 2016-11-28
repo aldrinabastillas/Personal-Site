@@ -1,0 +1,52 @@
+﻿/*#region General Styles*/
+.spotifyApp{
+    background-color: black;
+    color: white;
+}
+/*#endregion*/
+
+/*#region Semantic-UI overrides*/
+.ui.icon.input, .results {
+    min-width: 100%;
+}
+/*#endregion*/
+ 
+/*#region Layout*/
+/*TODO: don't hard code heights */
+#playerSection{
+    display: flex;
+    justify-content: center;
+}
+
+#predictionSection{
+    min-height: 410px;
+}
+
+#billboardTable {
+    overflow-y: scroll;
+    max-height: 335px;
+}
+/*#endregion Layout*/
+
+/*#region Text*/
+#yearDropdown {
+    color: black;
+}
+
+#errorText{
+    display: none;
+}
+
+#predictionText {
+    visibility: hidden; /*Default to hidden as JS is too slow upon loading*/
+    text-align: center;
+    line-height: 150%;
+}
+
+a:hover, a:focus {
+    color: #42DCA3;
+}
+/*#endregion Text*/
+
+
+
