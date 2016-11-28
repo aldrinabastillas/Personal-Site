@@ -24422,7 +24422,8 @@ Floated Menu / Item
   cursor: pointer;
   white-space: nowrap;
   border-left: 1px solid rgba(34, 36, 38, 0.15);
-  color: rgba(0, 0, 0, 0.87);
+  /*color: rgba(0, 0, 0, 0.87);*/
+  color: #42DCA3;
 }
 
 .ui.sortable.table thead th:first-child {
@@ -24493,7 +24494,8 @@ Floated Menu / Item
 .ui.inverted.sortable.table thead th.sorted {
   background: rgba(255, 255, 255, 0.15) -webkit-linear-gradient(transparent, rgba(0, 0, 0, 0.05));
   background: rgba(255, 255, 255, 0.15) linear-gradient(transparent, rgba(0, 0, 0, 0.05));
-  color: #ffffff;
+  /*color: #ffffff;*/
+  color: #42DCA3;
 }
 
 .ui.inverted.sortable.table thead th:hover {
