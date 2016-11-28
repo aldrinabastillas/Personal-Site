@@ -1,14 +1,20 @@
 ﻿/*#region Colors*/
-.spotifyApp{
+/*html{
     background-color: black;
     color: white;
+}*/
+
+.spotifyApp {
+    background-color: black;
+    color: white;
+    margin-top: 20px;
 }
 
 .panel-default > .panel-heading {
     background-color: #272727;
 }
 
-.panel-title{
+.panel-title {
     color: #42DCA3;
 }
 
@@ -22,35 +28,42 @@
     min-width: 100%;
 }
 /*#endregion*/
- 
-/*#region Layout*/
+
+/*#region Layout / Text*/
 /*TODO: don't hard code heights */
-#playerSection{
+#playerSection {
     display: flex;
     justify-content: center;
 }
 
-#predictionSection{
+#predictionSection {
     min-height: 410px;
+    text-align: center;
 }
 
 #billboardTable {
     overflow-y: scroll;
     max-height: 335px;
 }
-/*#endregion Layout*/
 
-/*#region Text*/
-#errorText{
+#errorText {
     display: none;
 }
 
 #predictionText {
     visibility: hidden; /*Default to hidden as JS is too slow upon loading*/
-    text-align: center;
     line-height: 150%;
 }
-/*#endregion Text*/
+
+#accordion li {
+    /*Don't use > in selector as li isn't a direct child*/
+    margin: 8px auto;
+}
+
+    #accordion li:last-child {
+        margin-bottom: 25px;
+    }
+/*#endregion Layout / Text*/
 
 
 

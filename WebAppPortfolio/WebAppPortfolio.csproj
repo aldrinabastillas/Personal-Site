@@ -196,10 +196,9 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\grayscale.css" />
+    <Content Include="Content\images\billboard.jpg" />
     <Content Include="Content\images\alaska.jpg" />
-    <Content Include="Content\images\alaska2.jpg" />
     <Content Include="Content\images\madison.jpg" />
-    <Content Include="Content\images\utah.jpg" />
     <Content Include="Content\Semantic-UI\components\icon.css" />
     <Content Include="Content\Semantic-UI\components\icon.min.css" />
     <Content Include="Content\Semantic-UI\components\input.css" />
@@ -246,7 +245,6 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\errors.json" />
     <Content Include="Scripts\angular.min.js.map" />
-    <Content Include="fonts\SourceSansPro-Light.otf" />
     <EntityDeploy Include="Models\Billboard100Songs.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Billboard100Songs.Designer.cs</LastGenOutput>
