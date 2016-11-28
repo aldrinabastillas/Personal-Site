@@ -217,6 +217,16 @@ a {
     position: relative;
 }
 
+    #billboardImage a {
+        position: absolute;
+        visibility: hidden;
+        top: 40%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+    }
+
     #billboardImage:hover > .overlay {
         width: 100%;
         height: 100%;
@@ -224,20 +234,9 @@ a {
         z-index: 10;
     }
 
-    #billboardImage:hover  a{
+    #billboardImage:hover a {
         visibility: visible;
     }
-
-.overlay > a {
-    position: absolute;
-    visibility: hidden;
-    top: 40%;
-    left: 0%;
-    width: 100%;
-    height: 100%;
-    z-index: 10;
-}
-
 
 
 /*#endregion Project Section
