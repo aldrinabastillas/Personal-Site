@@ -39,11 +39,12 @@
 #predictionSection {
     min-height: 410px;
     text-align: center;
+    vertical-align: middle;
 }
 
-#billboardTable {
-    overflow-y: scroll;
-    max-height: 335px;
+#searchHelp {
+    position: relative;
+    transform: translateY(120%);
 }
 
 #errorText {
@@ -55,9 +56,14 @@
     line-height: 150%;
 }
 
+#billboardTable {
+    overflow-y: scroll;
+    max-height: 335px;
+}
+
 #accordion li {
     /*Don't use > in selector as li isn't a direct child*/
-    margin: 8px auto;
+    margin: 8px auto; /*Increase spacing btw bullet points*/
 }
 
     #accordion li:last-child {

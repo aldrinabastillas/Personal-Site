@@ -16,24 +16,31 @@ using System.Web.Caching;
 using System.Web.Configuration;
 using System.Web.Mvc;
 using WebAppPortfolio.Models;
+using WebAppPortfolio.Classes;
 
 namespace WebAppPortfolio.Controllers
 {
-    public class SpotifyController : Controller
+    public class SpotifyController : HomeController
     {
+        #region Properties
+        private static EventLogger logger { get; set; }
+        #endregion
+
         #region Public Actions
         /// <summary>
-        /// 
+        /// Returns the app's main page in Views/Spotify/Index.cshtml
+        /// and caches the Spotify Web API access token
         /// </summary>
         /// <returns></returns>
-        /// 
-        public ActionResult Index()
+        public override ActionResult Index()
         {
             string accessToken = GetSpotifyAccessToken();
             if (!string.IsNullOrWhiteSpace(accessToken))
             {
                 HttpRuntime.Cache["AccessToken"] = accessToken;
             }
+
+            logger = new EventLogger();
 
             return View("Index", "_Layout");
         }
@@ -103,19 +110,18 @@ namespace WebAppPortfolio.Controllers
                 //string apiKey = WebConfigurationManager.AppSettings["AucModelApiKey"];
                 //client.BaseAddress = new Uri(WebConfigurationManager.AppSettings["AucModelUri"] + "&format=swagger");
 
-                string apiKey = WebConfigurationManager.AppSettings["F1ModelApiKey"];
                 client.BaseAddress = new Uri(WebConfigurationManager.AppSettings["F1ModelUri"] + "&format=swagger");
-
+                string apiKey = WebConfigurationManager.AppSettings["F1ModelApiKey"];
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
-                HttpResponseMessage response = await client.PostAsJsonAsync("", request).ConfigureAwait(false);
 
+                HttpResponseMessage response = await client.PostAsJsonAsync("", request).ConfigureAwait(false);
                 if (response.IsSuccessStatusCode)
                 {
                     result = await response.Content.ReadAsStringAsync();
                 }
                 else
                 {
-                    Console.WriteLine("Failed with status code: {0}", response.StatusCode);
+                    LogWarning("Failed with status code: " + response.StatusCode);
                     result = "Try again: Microsoft Azure Machine Learning web service returned an error.";
                 }
             }
@@ -221,7 +227,8 @@ namespace WebAppPortfolio.Controllers
                     }
                     else
                     {
-                        Trace.WriteLine(ex); //write to errors.xml file specified in Web.config
+                        //Trace.WriteLine(ex); //write to errors.xml file specified in Web.config
+                        LogWarning("Error in SpotifyController: " +  ex.Message);
                     }
                 }
             }
@@ -275,6 +282,24 @@ namespace WebAppPortfolio.Controllers
                 return accessToken;
             }
         }
+        #endregion
+
+        #region Error Handlers
+        protected override void OnException(ExceptionContext exceptionContext)
+        {
+            base.OnException(exceptionContext); //call handler in HomeController
+        }
+
+        private static void LogWarning(string message)
+        {
+            if (logger == null)
+            {
+                logger = new EventLogger();
+            }
+
+            logger.LogWarning(message);
+        }
+
         #endregion
 
     }

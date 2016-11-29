@@ -3,28 +3,54 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebAppPortfolio.Classes; //to get the EventLogger class
 
 namespace WebAppPortfolio.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        #region Properties
+        private EventLogger logger { get; set; }
+        #endregion
+
+        #region Public Actions
+        /// <summary>
+        /// Returns the main landing page: Views/Home/Index.cshtml
+        /// </summary>
+        /// <returns></returns>
+        public virtual ActionResult Index()
         {
+            logger = new EventLogger();
             return View();
         }
+        #endregion
 
-        public ActionResult About()
+        #region Exception Handler
+        /// <summary>
+        /// Logs an exception to the error log
+        /// </summary>
+        /// <param name="exceptionContext"></param>
+        protected override void OnException(ExceptionContext exceptionContext)
         {
-            ViewBag.Message = "Your application description page.";
+            if (logger == null)
+            {
+                logger = new EventLogger();
+            }
 
-            return View();
+            string message = (exceptionContext.Exception.Message != null) ? exceptionContext.Exception.Message : "No ex message" + this.ToString();
+            logger.LogException("Error in HomeController: " + message);
         }
 
-        public ActionResult Contact()
+        /// <summary>
+        /// Test writing to the error log
+        /// </summary>
+        /// <returns></returns>
+        public EmptyResult TestError()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            var exception = new Exception("Testing Error Logger");
+            OnException(new ExceptionContext(this.ControllerContext, exception));
+            return null;
         }
+        #endregion
     }
 }
