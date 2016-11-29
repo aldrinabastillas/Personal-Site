@@ -1,8 +1,11 @@
 ﻿/*#region Colors*/
-/*html{
+html{
     background-color: black;
-    color: white;
-}*/
+}
+
+footer h4{
+    color: white
+}
 
 .spotifyApp {
     background-color: black;
@@ -26,6 +29,11 @@
 /*#region Semantic-UI overrides*/
 .ui.icon.input, .results {
     min-width: 100%;
+}
+
+.ui.inverted.sortable.table thead th.sorted, 
+.ui.sortable.table thead th{
+    color: #42DCA3;
 }
 /*#endregion*/
 

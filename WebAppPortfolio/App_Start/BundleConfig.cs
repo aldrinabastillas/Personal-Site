@@ -25,11 +25,13 @@ namespace WebAppPortfolio
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/grayscale.css",
                       "~/Content/Spotify.css"));
 
-            bundles.Add(new ScriptBundle("~/bundles/angular").Include( 
+            bundles.Add(new ScriptBundle("~/bundles/angular").Include(
                     "~/Scripts/angular.js"));
+
+            BundleTable.EnableOptimizations = true; //minify. overrides compilation optimizations in web.config
         }
     }
+
 }
