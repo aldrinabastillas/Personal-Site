@@ -18,6 +18,7 @@ namespace WebAppPortfolio.Controllers
         /// Returns the main landing page: Views/Home/Index.cshtml
         /// </summary>
         /// <returns></returns>
+        [OutputCache(Duration = 300)]
         public virtual ActionResult Index()
         {
             logger = new EventLogger();

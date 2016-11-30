@@ -16,6 +16,18 @@
     <link href="~/Content/Semantic-UI/semantic.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+    <!-- Navigation Bar -->
+    <nav id="spotifyNavbar" class="navbar navbar-custom navbar-fixed-top top-nav-collapse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="~/Home/Index">
+                    <i class="fa fa-home" aria-hidden="true"></i> Aldrin Abastillas
+                </a>
+            </div>
+        </div>
+    </nav>
+    
+    <!--Spotify Angular App/Controller-->
     <div class="spotifyApp container-fluid">
         <div ng-controller="SpotifyController as spotify">
             <!--Row 1 (3 columns)-->
@@ -144,14 +156,13 @@
                                             </a>.
                                         </li>
                                         <li>
-                                            The benchmark for popularity used was the Billboard Hot 100 year-end list, which
-                                            is an industry standard in the United States.  Although the Spotify Web API does provide
-                                            a metric on popularity, this changes from day to day, so the year-end static lists were
+                                            The benchmark for popularity used was the Billboard Hot 100 year-end list, an
+                                            industry standard in the United States.  Although the Spotify Web API provides its
+                                            own metric on popularity, this changes daily, so the year-end static lists were
                                             preferred.
                                         </li>
                                         <li>
-                                            To assess whether these features influence a song's popularity, an algorithm was
-                                            designed using the
+                                            To assess whether these features influence a song's popularity, an algorithm was designed using the
                                             <a href="https://studio.azureml.net/" target="_blank">Microsoft Azure Machine Learning Studio</a>.
                                             Given a song's set of audio features, the algorithm would classify whether or not it would be
                                             on the Billboard Hot 100 list. Several algorithms to build a training model were tested,

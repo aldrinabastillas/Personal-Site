@@ -32,6 +32,7 @@ namespace WebAppPortfolio.Controllers
         /// and caches the Spotify Web API access token
         /// </summary>
         /// <returns></returns>
+        [OutputCache(Duration = 300)]
         public override ActionResult Index()
         {
             string accessToken = GetSpotifyAccessToken();
