@@ -241,4 +241,5 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 WebAppPortfolio/Web.config
+WebAppPortfolio/favicon.ico
 *.config
