@@ -25,11 +25,12 @@ namespace WebAppPortfolio.Classes
         /// </summary>
         public EventLogger()
         {
-            if (!EventLog.SourceExists(appName))
-            {
-                EventLog.CreateEventSource(appName, "EventLogs");
-            }
-            log = new EventLog();
+            //TODO: Change to Trace so that it can be used in Azure
+            //if (!EventLog.SourceExists(appName))
+            //{
+            //    EventLog.CreateEventSource(appName, "EventLogs");
+            //}
+            //log = new EventLog();
             eventId = 0;
             log.Source = appName;
         }

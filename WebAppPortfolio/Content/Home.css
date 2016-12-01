@@ -54,7 +54,7 @@ a {
     transition: all 0.2s ease-in-out;
 }
 
-    a:hover, a:focus {
+    a:focus, a:hover {
         color: #42DCA3;
         text-decoration: none;
     }
@@ -72,9 +72,11 @@ a {
 }
 
     .navbar-custom .navbar-toggle {
-        color: white;
+        color: #42DCA3;
         background-color: rgba(255, 255, 255, 0.2);
         font-size: 12px;
+        float: left;
+        margin-left: 9px;
     }
 
     .navbar-custom .navbar-brand {
@@ -88,8 +90,8 @@ a {
         transition: background 0.3s ease-in-out;
     }
 
-        .navbar-custom .nav li a:hover,
         .navbar-custom .nav li a:focus,
+        .navbar-custom .nav li a:hover,
         .navbar-custom .nav li a:active,
         .navbar-custom .nav li.active a,
         .navbar-custom .nav li.active a:hover {
@@ -236,7 +238,22 @@ a {
 
     #billboardImage:hover a {
         visibility: visible;
+        color: #42DCA3;
     }
+
+@media (max-width: 767px){
+    #billboardImage a{
+        visibility: visible;
+        color: #42DCA3;
+    }
+
+    #billboardImage > .overlay {
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 10;
+    }
+}
 
 
 /*#endregion Project Section*/
@@ -251,7 +268,7 @@ a {
     transition: all 0.3s ease-in-out;
 }
 
-    .btn:hover, .btn:focus {
+    .btn:focus, .btn:hover {
         outline: none;
         color: #42DCA3;
         background: rgba(66, 220, 163, 0.2);
@@ -296,9 +313,15 @@ a {
         margin-bottom: 5px;
     }
 
-    #images p{
+    #images p {
         font-style: italic;
     }
+
+@media (max-width: 767px) {
+    #images p{
+        font-size: 8px;
+    }
+}
 /*#endregion*/
 
 /*#region Footer*/

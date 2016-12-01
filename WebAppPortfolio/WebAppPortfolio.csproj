@@ -257,6 +257,7 @@
     <Content Include="Content\Semantic-UI\themes\default\assets\fonts\icons.ttf" />
     <Content Include="Content\Semantic-UI\themes\default\assets\fonts\icons.woff" />
     <Content Include="Content\Semantic-UI\themes\default\assets\fonts\icons.woff2" />
+    <None Include="Properties\PublishProfiles\aldrinabastillas.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

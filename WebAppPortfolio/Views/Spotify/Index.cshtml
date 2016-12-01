@@ -20,13 +20,16 @@
     <nav id="spotifyNavbar" class="navbar navbar-custom navbar-fixed-top top-nav-collapse" role="navigation">
         <div class="container">
             <div class="navbar-header">
+                <a href="~/Home/Index" class="navbar-toggle btn" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-home" aria-hidden="true"></i> Home
+                </a>
                 <a class="navbar-brand" href="~/Home/Index">
                     <i class="fa fa-home" aria-hidden="true"></i> Aldrin Abastillas
                 </a>
             </div>
         </div>
     </nav>
-    
+
     <!--Spotify Angular App/Controller-->
     <div class="spotifyApp container-fluid">
         <div ng-controller="SpotifyController as spotify">

@@ -41,7 +41,7 @@ namespace WebAppPortfolio.Controllers
                 HttpRuntime.Cache["AccessToken"] = accessToken;
             }
 
-            logger = new EventLogger();
+            //logger = new EventLogger();
 
             return View("Index", "_Layout");
         }
@@ -122,7 +122,7 @@ namespace WebAppPortfolio.Controllers
                 }
                 else
                 {
-                    LogWarning("Failed with status code: " + response.StatusCode);
+                    //LogWarning("Failed with status code: " + response.StatusCode);
                     result = "Try again: Microsoft Azure Machine Learning web service returned an error.";
                 }
             }
@@ -229,7 +229,7 @@ namespace WebAppPortfolio.Controllers
                     else
                     {
                         //Trace.WriteLine(ex); //write to errors.xml file specified in Web.config
-                        LogWarning("Error in SpotifyController: " +  ex.Message);
+                        //LogWarning("Error in SpotifyController: " +  ex.Message);
                     }
                 }
             }
@@ -286,20 +286,20 @@ namespace WebAppPortfolio.Controllers
         #endregion
 
         #region Error Handlers
-        protected override void OnException(ExceptionContext exceptionContext)
-        {
-            base.OnException(exceptionContext); //call handler in HomeController
-        }
+        //protected override void OnException(ExceptionContext exceptionContext)
+        //{
+        //    base.OnException(exceptionContext); //call handler in HomeController
+        //}
 
-        private static void LogWarning(string message)
-        {
-            if (logger == null)
-            {
-                logger = new EventLogger();
-            }
+        //private static void LogWarning(string message)
+        //{
+        //    if (logger == null)
+        //    {
+        //        logger = new EventLogger();
+        //    }
 
-            logger.LogWarning(message);
-        }
+        //    logger.LogWarning(message);
+        //}
 
         #endregion
 
