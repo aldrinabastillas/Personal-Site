@@ -163,28 +163,23 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Classes\EventLogger.cs" />
-    <Compile Include="Models\Billboard100Song.cs">
-      <DependentUpon>Billboard100Songs.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Billboard100Songs.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Billboard100Songs.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Billboard100Songs.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Billboard100Songs.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Billboard100Songs.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Billboard100Songs.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SpotifyController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Billboard100Songs.cs">
+      <DependentUpon>Billboard100SongsAzure.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Billboard100SongsAzure.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Billboard100SongsAzure.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Billboard100SongsAzure.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Billboard100SongsAzure.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\PredictionRequest.cs" />
     <Compile Include="Models\SpotifyToken.cs" />
@@ -214,20 +209,20 @@
     <Content Include="Content\Semantic-UI\semantic.min.css" />
     <Content Include="Content\Semantic-UI\semantic.min.js" />
     <Content Include="Content\Semantic-UI\themes\default\assets\fonts\icons.svg" />
-    <Content Include="Models\Billboard100Songs.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Billboard100Songs.edmx</DependentUpon>
-      <LastGenOutput>Billboard100Songs.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Billboard100Songs.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Billboard100Songs.edmx</DependentUpon>
-      <LastGenOutput>Billboard100Songs.cs</LastGenOutput>
-    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Spotify.css" />
+    <Content Include="Models\Billboard100SongsAzure.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Billboard100SongsAzure.edmx</DependentUpon>
+      <LastGenOutput>Billboard100SongsAzure.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Billboard100SongsAzure.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Billboard100SongsAzure.edmx</DependentUpon>
+      <LastGenOutput>Billboard100SongsAzure.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\ai.0.22.19-build00125.js" />
     <Content Include="Scripts\ai.0.22.19-build00125.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -245,18 +240,18 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\errors.json" />
     <Content Include="Scripts\angular.min.js.map" />
-    <EntityDeploy Include="Models\Billboard100Songs.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Billboard100Songs.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Billboard100Songs.edmx.diagram">
-      <DependentUpon>Billboard100Songs.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\Semantic-UI\themes\default\assets\fonts\icons.eot" />
     <Content Include="Content\Semantic-UI\themes\default\assets\fonts\icons.otf" />
     <Content Include="Content\Semantic-UI\themes\default\assets\fonts\icons.ttf" />
     <Content Include="Content\Semantic-UI\themes\default\assets\fonts\icons.woff" />
     <Content Include="Content\Semantic-UI\themes\default\assets\fonts\icons.woff2" />
+    <EntityDeploy Include="Models\Billboard100SongsAzure.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Billboard100SongsAzure.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Billboard100SongsAzure.edmx.diagram">
+      <DependentUpon>Billboard100SongsAzure.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\aldrinabastillas.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />

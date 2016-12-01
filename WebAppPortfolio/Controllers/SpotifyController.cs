@@ -78,12 +78,13 @@ namespace WebAppPortfolio.Controllers
         /// <returns></returns>
         public JsonResult GetYearList(int year)
         {
-            var list = new List<Billboard100Song>();
-            using (var db = new Billboard100Entities())
+            var list = new List<Billboard100Songs>();
+            var connectionString = WebConfigurationManager.ConnectionStrings;
+            using(var db = new Billboard100SongsAzure())
             {
                 try
                 {
-                    list = (from songs in db.Billboard100Song
+                    list = (from songs in db.Billboard100
                             where songs.Year == year
                             select songs).OrderBy(s => s.Position).ToList();
                 }
@@ -108,9 +109,6 @@ namespace WebAppPortfolio.Controllers
             string result = string.Empty;
             using (var client = new HttpClient())
             {
-                //string apiKey = WebConfigurationManager.AppSettings["AucModelApiKey"];
-                //client.BaseAddress = new Uri(WebConfigurationManager.AppSettings["AucModelUri"] + "&format=swagger");
-
                 client.BaseAddress = new Uri(WebConfigurationManager.AppSettings["F1ModelUri"] + "&format=swagger");
                 string apiKey = WebConfigurationManager.AppSettings["F1ModelApiKey"];
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
