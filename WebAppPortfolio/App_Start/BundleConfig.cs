@@ -27,8 +27,11 @@ namespace WebAppPortfolio
                       "~/Content/bootstrap.css",
                       "~/Content/Spotify.css"));
 
-            bundles.Add(new ScriptBundle("~/bundles/angular").Include(
-                    "~/Scripts/angular.js"));
+            bundles.Add(new ScriptBundle("~/bundles/SpotifyPage").Include(
+                      "~/Scripts/angular.js",  //must come before Spotify.js
+                      "~/Content/Semantic-UI/semantic.js",
+                      "~/Scripts/Spotify/Spotify.js",
+                      "~/Scripts/Spotify/tablesort.js"));
 
             BundleTable.EnableOptimizations = true; //minify. overrides compilation optimizations in web.config
         }
