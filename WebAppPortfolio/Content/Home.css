@@ -202,7 +202,7 @@ a {
 
 /*#region Projects Section*/
 .projects-section {
-    padding-top: 200px;
+    padding-top: 50px;
 }
 
 @media (min-width: 767px) {
@@ -241,8 +241,8 @@ a {
         color: #42DCA3;
     }
 
-@media (max-width: 767px){
-    #billboardImage a{
+@media (max-width: 767px) {
+    #billboardImage a {
         visibility: visible;
         color: #42DCA3;
     }
@@ -287,7 +287,7 @@ a {
     width: 100%;
     padding: 50px 0;
     color: white;
-    background: url(../Content/images/madison.jpg); /*fixed used to be scroll*/
+    background: url(../Content/images/madison.jpg);
     background-color: black;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -295,14 +295,14 @@ a {
     -o-background-size: cover;
 }
 
-@media (min-width: 767px) {
+@media (max-width: 767px) {
     .contact-section {
         padding: 100px 0;
     }
 }
 /*#endregion Contact Section*/
 
-/*#region Images section*/
+/*#region Images Section*/
 #images, #images p {
     text-align: center;
     font-size: 12px;
@@ -318,7 +318,7 @@ a {
     }
 
 @media (max-width: 767px) {
-    #images p{
+    #images p {
         font-size: 8px;
     }
 }
@@ -362,5 +362,11 @@ img::-moz-selection {
     background-position: bottom;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+@media (max-width: 767px) {
+    .parallax {
+        background-attachment: scroll; /*Remove parallax on mobile*/
+    }
 }
 /*#endregion Parallax*/

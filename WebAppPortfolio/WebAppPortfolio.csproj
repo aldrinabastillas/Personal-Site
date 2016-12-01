@@ -191,9 +191,11 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Home.css" />
+    <Content Include="Content\images\alaska_small.jpg" />
     <Content Include="Content\images\billboard.jpg" />
     <Content Include="Content\images\alaska.jpg" />
     <Content Include="Content\images\madison.jpg" />
+    <Content Include="Content\images\madison_small.jpg" />
     <Content Include="Content\Semantic-UI\components\icon.css" />
     <Content Include="Content\Semantic-UI\components\icon.min.css" />
     <Content Include="Content\Semantic-UI\components\input.css" />
