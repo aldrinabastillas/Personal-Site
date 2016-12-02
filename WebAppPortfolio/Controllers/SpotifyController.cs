@@ -29,13 +29,13 @@ namespace WebAppPortfolio.Controllers
         #region Public Actions
         /// <summary>
         /// Returns the app's main page in Views/Spotify/Index.cshtml
-        /// and caches the Spotify Web API access token
+        /// Caches the Spotify Web API access token and the page for 5 minutes
         /// </summary>
         /// <returns></returns>
         [OutputCache(Duration = 300)]
         public override ActionResult Index()
         {
-            string accessToken = GetSpotifyAccessToken();
+            string accessToken = SpotifyAPIs.GetSpotifyAccessToken();
             if (!string.IsNullOrWhiteSpace(accessToken))
             {
                 HttpRuntime.Cache["AccessToken"] = accessToken;
@@ -47,14 +47,15 @@ namespace WebAppPortfolio.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Given a trackID, gets its audio features then passes that
+        /// to the Machine Learning Web Service
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         public async Task<JsonResult> GetPrediction(string id)
         {
-            Task<JObject> audioFeatures = GetSpotifyAudioFeaturesAsync(id);
-            Task<int> trackYear = GetTrackReleaseYear(id);
+            Task<JObject> audioFeatures = SpotifyAPIs.GetSpotifyAudioFeaturesAsync(id);
+            Task<int> trackYear = SpotifyAPIs.GetTrackReleaseYear(id);
             await Task.WhenAll(audioFeatures, trackYear);
 
             string response;
@@ -72,7 +73,8 @@ namespace WebAppPortfolio.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Gets a list of Billboard Hot 100 songs from a given year
+        /// from the SQL DB using Entity
         /// </summary>
         /// <param name="year"></param>
         /// <returns></returns>
@@ -100,7 +102,8 @@ namespace WebAppPortfolio.Controllers
 
         #region Private Machine Learning Methods
         /// <summary>
-        /// 
+        /// Calls the machine learning web service
+        /// See https://docs.microsoft.com/en-us/azure/machine-learning/machine-learning-consume-web-services#request-response-service-rrs
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
@@ -125,161 +128,6 @@ namespace WebAppPortfolio.Controllers
                 }
             }
             return result;
-        }
-        #endregion
-
-        #region Private Spotify Methods
-        /// <summary>
-        /// See https://developer.spotify.com/web-api/get-audio-features/
-        /// Calls https://api.spotify.com/v1/audio-features/{id}
-        /// </summary>
-        /// <param name="query"></param>
-        /// <returns></returns>
-        private static async Task<JObject> GetSpotifyAudioFeaturesAsync(string id)
-        {
-            var uri = new Uri("https://api.spotify.com/v1/audio-features/" + id);
-            return await SendAsyncSpotifyQuery(uri); ;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="trackId"></param>
-        /// <returns></returns>
-        private static async Task<int> GetTrackReleaseYear(string trackId)
-        {
-            string albumId = await GetAlbumIdAsync(trackId);
-            return await GetAlbumReleaseYear(albumId);
-        }
-
-        /// <summary>
-        /// See https://developer.spotify.com/web-api/get-track/
-        /// Calls https://api.spotify.com/v1/tracks/{id}
-        /// </summary>
-        /// <param name="trackId"></param>
-        /// <returns></returns>
-        private static async Task<string> GetAlbumIdAsync(string trackId)
-        {
-            Uri uri = new Uri("https://api.spotify.com/v1/tracks/" + trackId);
-            JObject response = await SendAsyncSpotifyQuery(uri);
-
-            string albumId = string.Empty;
-            if (response.HasValues)
-            {
-                albumId = response.SelectToken("$.album.id").ToString();
-            }
-
-            return albumId;
-        }
-
-        /// <summary>
-        /// See https://developer.spotify.com/web-api/get-album/
-        /// Calls 	https://api.spotify.com/v1/albums/{id}
-        /// </summary>
-        /// <param name="albumId"></param>
-        /// <returns></returns>
-        private static async Task<int> GetAlbumReleaseYear(string albumId)
-        {
-            Uri uri = new Uri("https://api.spotify.com/v1/albums/" + albumId);
-            JObject response = await SendAsyncSpotifyQuery(uri);
-
-            int date = 0;
-            if (response.HasValues)
-            {
-                string[] temp = response.SelectToken("$.release_date").ToString().Split('-');
-                date = Convert.ToInt32(temp[0]);
-            }
-
-            return date;
-        }
-
-        /// <summary>
-        /// For error object model, see https://developer.spotify.com/web-api/user-guide/#error-details
-        /// For info about request limits, see https://developer.spotify.com/web-api/user-guide/#rate-limiting
-        /// </summary>
-        /// <param name="uri"></param>
-        /// <returns></returns>
-        private static async Task<JObject> SendAsyncSpotifyQuery(Uri uri)
-        {
-            var obj = new JObject();
-            using (var client = new WebClient())
-            {
-                try
-                {
-                    string token = GetSpotifyAccessToken();
-                    client.Headers.Add("Authorization", "Bearer " + token);
-                    string response = await client.DownloadStringTaskAsync(uri);
-                    obj = JsonConvert.DeserializeObject<JObject>(response);
-                }
-                catch (WebException ex)
-                {
-                    HttpWebResponse httpResponse = (HttpWebResponse)ex.Response;
-                    if (httpResponse.StatusDescription.Contains("Too Many Requests"))
-                    {
-                        int seconds = Convert.ToInt32(ex.Response.Headers["Retry-After"]);
-                        seconds = (seconds < 5) ? 5 : seconds; //if seconds < 5, default to 5
-
-                        Console.WriteLine("Will retry after {0} second(s)", seconds);
-                        Thread.Sleep(seconds * 1000);
-                        Console.WriteLine("Retrying");
-                        return await SendAsyncSpotifyQuery(uri);
-                    }
-                    else
-                    {
-                        //Trace.WriteLine(ex); //write to errors.xml file specified in Web.config
-                        //LogWarning("Error in SpotifyController: " +  ex.Message);
-                    }
-                }
-            }
-            return obj;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        private static string GetSpotifyAccessToken()
-        {
-            string accessToken = HttpRuntime.Cache["AccessToken"] as string;
-            if (!string.IsNullOrWhiteSpace(accessToken))
-            {
-                return accessToken;
-            }
-
-            Uri uri = new Uri("https://accounts.spotify.com/api/token");
-            string privateKey = WebConfigurationManager.AppSettings["SpotifyPrivateAppKey"];
-            string clientID = WebConfigurationManager.AppSettings["SpotifyClientID"];
-
-            using (var client = new WebClient())
-            {
-                string authValue = clientID + ":" + privateKey;
-                byte[] bytes = Encoding.UTF8.GetBytes(authValue);
-                authValue = Convert.ToBase64String(bytes);
-
-                client.Headers.Add("Authorization", "Basic " + authValue);
-
-                NameValueCollection data = new NameValueCollection
-                {
-                    { "grant_type", "client_credentials" }
-                };
-
-                byte[] response;
-                try
-                {
-                    response = client.UploadValues(uri, "POST", data);
-                    JObject obj = JsonConvert.DeserializeObject<JObject>(Encoding.Default.GetString(response));
-                    if (obj.HasValues)
-                    {
-                        JToken jToken = obj.SelectToken("$.access_token");
-                        accessToken = jToken.ToString();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Trace.WriteLine(ex); //write to errors.xml file specified in Web.config
-                }
-                return accessToken;
-            }
         }
         #endregion
 

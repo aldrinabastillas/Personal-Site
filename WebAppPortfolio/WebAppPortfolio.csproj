@@ -163,6 +163,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Classes\EventLogger.cs" />
+    <Compile Include="Classes\SpotifyAPIs.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SpotifyController.cs" />
     <Compile Include="Global.asax.cs">

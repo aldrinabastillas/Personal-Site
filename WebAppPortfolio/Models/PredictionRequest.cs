@@ -1,22 +1,34 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace WebAppPortfolio.Models
 {
+    /// <summary>
+    /// Input format expected from machine learning web service
+    /// See https://docs.microsoft.com/en-us/azure/machine-learning/machine-learning-consume-web-services#request-response-service-rrs
+    /// </summary>
     public class PredictionRequest
     {
+        #region Public Properties
         public Dictionary<string, List<Dictionary<string, string>>> Inputs { get; set; }
         public Dictionary<string, string> GlobalParameters { get; set; }
+        #endregion
 
+        #region Constructor
         public PredictionRequest()
         {
             Inputs = new Dictionary<string, List<Dictionary<string, string>>>();
             GlobalParameters = new Dictionary<string, string>();
         }
+        #endregion
 
+        /// <summary>
+        /// Parses a JSON response object from Spotify puts it in the expected format
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="year"></param>
+        /// <returns></returns>
         public static PredictionRequest CreateRequest(JObject obj, int year)
         {
             var request = new PredictionRequest();
@@ -64,7 +76,7 @@ namespace WebAppPortfolio.Models
         }
 
         /// <summary>
-        /// 
+        /// Parses JSON Object for a particular token and returns the token's value
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="token"></param>
