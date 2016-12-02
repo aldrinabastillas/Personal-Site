@@ -16,6 +16,7 @@ namespace WebAppPortfolio.Controllers
         #region Public Actions
         /// <summary>
         /// Returns the main landing page: Views/Home/Index.cshtml
+        /// Page is cached in browser for 5 mins
         /// </summary>
         /// <returns></returns>
         [OutputCache(Duration = 300)]

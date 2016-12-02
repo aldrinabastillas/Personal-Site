@@ -3,412 +3,408 @@
     ViewBag.Title = "Billboard Hot 100 Predictor";
 }
 
-<!DOCTYPE html>
-<html ng-app="spotifyApp">
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Billboard Top 100 Predictor</title>
+<meta name="viewport" content="width=device-width" />
+<title>Billboard Top 100 Predictor</title>
 
-    <!-- CSS -->
-    <link href="~/Content/Semantic-UI/semantic.min.css" rel="stylesheet" type="text/css">
-</head>
-<body>
-    <!-- Navigation Bar -->
-    <nav id="spotifyNavbar" class="navbar navbar-custom navbar-fixed-top top-nav-collapse" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <a href="~/Home/Index" class="navbar-toggle btn" data-toggle="collapse" data-target=".navbar-main-collapse">
-                    <i class="fa fa-home" aria-hidden="true"></i> Home
-                </a>
-                <a class="navbar-brand" href="~/Home/Index">
-                    <i class="fa fa-home" aria-hidden="true"></i> Aldrin Abastillas
-                </a>
-            </div>
+<!-- CSS -->
+<link href="~/Content/Spotify.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/Semantic-UI/semantic.min.css" rel="stylesheet" type="text/css">
+
+<!-- Navigation Bar -->
+<nav id="spotifyNavbar" class="navbar navbar-custom navbar-fixed-top top-nav-collapse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a href="~/Home/Index" class="navbar-toggle btn" data-toggle="collapse" data-target=".navbar-main-collapse">
+                <i class="fa fa-home" aria-hidden="true"></i> Home
+            </a>
+            <a class="navbar-brand" href="~/Home/Index">
+                <i class="fa fa-home" aria-hidden="true"></i> Aldrin Abastillas
+            </a>
         </div>
-    </nav>
+    </div>
+</nav>
 
-    <!--Spotify Angular App/Controller-->
-    <div class="spotifyApp container-fluid">
-        <div ng-controller="SpotifyController as spotify">
-            <!--Row 1 (3 columns)-->
-            <div class="row">
-                <!--Col 1-->
-                <div class="col-md-4 col-lg-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">Listen</h4>
-                        </div>
-                        <div class="panel-body" id="playerSection">
-                            <iframe src="https://embed.spotify.com/?uri=spotify:user:billboard.com:playlist:6UeSakyzhiEt4NB3UAd6NQ"
-                                    id="spotifyPlayer" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
-                        </div>
+<!--Spotify Angular App/Controller-->
+<div ng-app="spotifyApp" class="spotifyApp container-fluid">
+    <div ng-controller="SpotifyController as spotify">
+        <!--Row 1 (3 columns)-->
+        <div class="row">
+            <!--Col 1-->
+            <div class="col-md-4 col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Listen</h4>
+                    </div>
+                    <div class="panel-body" id="playerSection">
+                        <iframe src="https://embed.spotify.com/?uri=spotify:user:billboard.com:playlist:6UeSakyzhiEt4NB3UAd6NQ"
+                                id="spotifyPlayer" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
                     </div>
                 </div>
-
-                <!--Col 2-->
-                <div class="col-md-4 col-lg-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">Predictions</h4>
-                        </div>
-                        <div class="panel-body" id="predictionSection">
-                            <div id="songSearch" class="ui search">
-                                <div class="ui icon input">
-                                    <input class="prompt" type="text"
-                                           placeholder="Search for a song!" ng-model="searchTerm">
-                                    <i class="search icon"></i>
-                                </div>
-                                <div class="results"></div>
-                            </div>
-                            <br />
-                            <div id="searchHelp">
-                                <p>
-                                    Search above for a song to predict if it would be on
-                                    the Billboard Hot 100 chart!
-                                </p>
-                            </div>
-                            <h3 id="errorText">{{errorText}}</h3>
-                            <h2 id="predictionText">
-                                {{selectedSong}} by {{selectedArtist}} <br />
-                                is {{probability}} {{prediction}} <br />
-                                to be a Billboard Top 100 Song.
-                            </h2>
-                        </div>
-                    </div>
-                </div>
-
-                <!--Col 3-->
-                <div class="col-md-4 col-lg-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h5 class="panel-title">Previous Billboard Hot 100 Songs</h5>
-                        </div>
-                        <div class="panel-body" id="billboardSection">
-                            <form>
-                                <label for="yearDropdown">Year: &nbsp;</label>
-                                <select name="singleSelect" id="yearDropdown"
-                                        ng-model="spotify.selectedYear" ng-change="spotify.getYearList(spotify.selectedYear)"
-                                        ng-options="year for year in spotify.availableYears"></select>
-                            </form>
-                            <br />
-
-                            <div id="billboardTable">
-                                <table class="ui inverted sortable selectable striped celled unstackable compact table">
-                                    <thead>
-                                        <tr>
-                                            <th class="sorted ascending">#</th>
-                                            <th>Song</th>
-                                            <th>Artist</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr ng-repeat="song in spotify.billboardSongs">
-                                            <td class="left aligned">{{song.Position}}</td>
-                                            <td>{{song.Song}}</td>
-                                            <td>{{song.Artist}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
-            <br />
 
-            <!--Row 2 (Description Panels)-->
-            <div class="row">
-                <div class="col-md-8 col-lg-8 col-md-offset-2 col-lg-offset-2">
-                    <div id="accordion" class="panel-group" role="tablist" aria-multiselectable="true">
-
-                        <!--Panel 1-->
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingOne">
-                                <h4 class="panel-title">
-                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        Introduction  <span class="panelArrow glyphicon glyphicon-chevron-up"></span>
-                                    </a>
-                                </h4>
+            <!--Col 2-->
+            <div class="col-md-4 col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Predictions</h4>
+                    </div>
+                    <div class="panel-body" id="predictionSection">
+                        <div id="songSearch" class="ui search">
+                            <div class="ui icon input">
+                                <input class="prompt" type="text"
+                                       placeholder="Search for a song!" ng-model="searchTerm">
+                                <i class="search icon"></i>
                             </div>
-                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                                <div class="panel-body">
-                                    <strong>Background</strong>
-                                    <ul>
-                                        <li>
-                                            This is an experiment to see if there are distinguishing factors that make certain
-                                            songs more popular than others.
-                                        </li>
-                                        <li>
-                                            The original hypotheses about the biggest contributers to popularity revolved around
-                                            analyzing lyrics.  Features could be reading level, number of distinct words, or
-                                            frequency of word repetition in verses and choruses.  However, due to artist licensing,
-                                            most lyrics databases were not available without subscriptions, or had
-                                            rate limits on API calls too low to efficiently build up training and test sets.
-                                        </li>
-                                        <li>
-                                            Instead, the features used were subjective qualities about each song described on a
-                                            numerical scale.  For example, a song's "Danceability" was rated from 0.0 being
-                                            least danceable to 1.0 being most danceable based on elements like tempo,
-                                            rhythm regularity, and beat strength.  These audio features were provided by
-                                            <a href="https://developer.spotify.com/web-api/get-audio-features/" target="_blank">
-                                                Spotify's Web API
-                                            </a>.
-                                        </li>
-                                        <li>
-                                            The benchmark for popularity used was the Billboard Hot 100 year-end list, an
-                                            industry standard in the United States.  Although the Spotify Web API provides its
-                                            own metric on popularity, this changes daily, so the year-end static lists were
-                                            preferred.
-                                        </li>
-                                        <li>
-                                            To assess whether these features influence a song's popularity, an algorithm was designed using the
-                                            <a href="https://studio.azureml.net/" target="_blank">Microsoft Azure Machine Learning Studio</a>.
-                                            Given a song's set of audio features, the algorithm would classify whether or not it would be
-                                            on the Billboard Hot 100 list. Several algorithms to build a training model were tested,
-                                            and based on its performance, the Two-Class Neural Network was ultimately chosen.
-                                        </li>
-                                        <li>
-                                            Details on the training sets, features, algorithm, and its performance are below!
-                                        </li>
-                                    </ul>
-                                </div>
+                            <div class="results"></div>
+                        </div>
+                        <br />
+                        <div id="searchHelp">
+                            <p>
+                                Search above for a song to predict if it would be on
+                                the Billboard Hot 100 chart!
+                            </p>
+                        </div>
+                        <h3 id="errorText">{{errorText}}</h3>
+                        <h2 id="predictionText">
+                            {{selectedSong}} by {{selectedArtist}} <br />
+                            is {{probability}} {{prediction}} <br />
+                            to be a Billboard Top 100 Song.
+                        </h2>
+                    </div>
+                </div>
+            </div>
+
+            <!--Col 3-->
+            <div class="col-md-4 col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h5 class="panel-title">Previous Billboard Hot 100 Songs</h5>
+                    </div>
+                    <div class="panel-body" id="billboardSection">
+                        <form>
+                            <label for="yearDropdown">Year: &nbsp;</label>
+                            <select name="singleSelect" id="yearDropdown"
+                                    ng-model="spotify.selectedYear" ng-change="spotify.getYearList(spotify.selectedYear)"
+                                    ng-options="year for year in spotify.availableYears"></select>
+                        </form>
+                        <br />
+
+                        <div id="billboardTable">
+                            <table class="ui inverted sortable selectable striped celled unstackable compact table">
+                                <thead>
+                                    <tr>
+                                        <th class="sorted ascending">#</th>
+                                        <th>Song</th>
+                                        <th>Artist</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="song in spotify.billboardSongs">
+                                        <td class="left aligned">{{song.Position}}</td>
+                                        <td>{{song.Song}}</td>
+                                        <td>{{song.Artist}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <br />
+
+        <!--Row 2 (Description Panels)-->
+        <div class="row">
+            <div class="col-md-8 col-lg-8 col-md-offset-2 col-lg-offset-2">
+                <div id="accordion" class="panel-group" role="tablist" aria-multiselectable="true">
+
+                    <!--Panel 1-->
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Introduction  <span class="panelArrow glyphicon glyphicon-chevron-up"></span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <strong>Background</strong>
+                                <ul>
+                                    <li>
+                                        This is an experiment to see if there are distinguishing factors that make certain
+                                        songs more popular than others.
+                                    </li>
+                                    <li>
+                                        The original hypotheses about the biggest contributers to popularity revolved around
+                                        analyzing lyrics.  Features could be reading level, number of distinct words, or
+                                        frequency of word repetition in verses and choruses.  However, due to artist licensing,
+                                        most lyrics databases were not available without subscriptions, or had
+                                        rate limits on API calls too low to efficiently build up training and test sets.
+                                    </li>
+                                    <li>
+                                        Instead, the features used were subjective qualities about each song described on a
+                                        numerical scale.  For example, a song's "Danceability" was rated from 0.0 being
+                                        least danceable to 1.0 being most danceable based on elements like tempo,
+                                        rhythm regularity, and beat strength.  These audio features were provided by
+                                        <a href="https://developer.spotify.com/web-api/get-audio-features/" target="_blank">
+                                            Spotify's Web API
+                                        </a>.
+                                    </li>
+                                    <li>
+                                        The benchmark for popularity used was the Billboard Hot 100 year-end list, an
+                                        industry standard in the United States.  Although the Spotify Web API provides its
+                                        own metric on popularity, this changes daily, so the year-end static lists were
+                                        preferred.
+                                    </li>
+                                    <li>
+                                        To assess whether these features influence a song's popularity, an algorithm was designed using the
+                                        <a href="https://studio.azureml.net/" target="_blank">Microsoft Azure Machine Learning Studio</a>.
+                                        Given a song's set of audio features, the algorithm would classify whether or not it would be
+                                        on the Billboard Hot 100 list. Several algorithms to build a training model were tested,
+                                        and based on its performance, the Two-Class Neural Network was ultimately chosen.
+                                    </li>
+                                    <li>
+                                        Details on the training sets, features, algorithm, and its performance are below!
+                                    </li>
+                                </ul>
                             </div>
                         </div>
+                    </div>
 
 
-                        <!--Panel 2-->
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingTwo">
-                                <h4 class="panel-title">
-                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                        Training Data <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                                <div class="panel-body">
-                                    <strong>Positive class samples</strong>
-                                    <ul>
-                                        <li>~4500 songs from the Billboard's Hot 100 year-end lists were labeled as positive class samples.</li>
-                                        <li>
-                                            Billboard magazine's Hot 100 chart is a list published weekly that ranks the most popular songs
-                                            in the US in terms of radio airplay, streaming data, and sales. Every December, since 1956, the
-                                            top 100 songs of the year are then aggregated, which were used for the model's positive labels.
-                                            Years prior to 1956, the number of songs on the year-end chart varied, with the earliest
-                                            available list being 1946.
-                                        </li>
-                                        <li>
-                                            The year-end lists were found on
-                                            <a href="http://www.bobborst.com/popculture/top-100-songs-of-the-year/?year=1946" target="_blank">
-                                                bobborst.com
-                                            </a>.
-                                        </li>
-                                    </ul>
+                    <!--Panel 2-->
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingTwo">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Training Data <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                            <div class="panel-body">
+                                <strong>Positive class samples</strong>
+                                <ul>
+                                    <li>~4500 songs from the Billboard's Hot 100 year-end lists were labeled as positive class samples.</li>
+                                    <li>
+                                        Billboard magazine's Hot 100 chart is a list published weekly that ranks the most popular songs
+                                        in the US in terms of radio airplay, streaming data, and sales. Every December, since 1956, the
+                                        top 100 songs of the year are then aggregated, which were used for the model's positive labels.
+                                        Years prior to 1956, the number of songs on the year-end chart varied, with the earliest
+                                        available list being 1946.
+                                    </li>
+                                    <li>
+                                        The year-end lists were found on
+                                        <a href="http://www.bobborst.com/popculture/top-100-songs-of-the-year/?year=1946" target="_blank">
+                                            bobborst.com
+                                        </a>.
+                                    </li>
+                                </ul>
 
-                                    <strong>Negative class samples</strong>
-                                    <ul>
-                                        <li>
-                                            ~4500 random songs from Spotify playlists in the following categories, not already
-                                            labeled as positive, were labeled as negative class samples:
-                                            Decades, Pop, Rock, Hip-Hop, Country, Jazz, Blues.
-                                        </li>
-                                    </ul>
+                                <strong>Negative class samples</strong>
+                                <ul>
+                                    <li>
+                                        ~4500 random songs from Spotify playlists in the following categories, not already
+                                        labeled as positive, were labeled as negative class samples:
+                                        Decades, Pop, Rock, Hip-Hop, Country, Jazz, Blues.
+                                    </li>
+                                </ul>
 
-                                    <strong>Features</strong>
-                                    <ul>
-                                        <li>
-                                            The following audio features were extracted for each sample using Spotify's Web API:
-                                            Danceability, Energy, Loudness, Mode, Speechiness, Acousticness,
-                                            Instrumentalness, Key Signature, Liveness, Valence, Duration, Time Signature.  Details on each of these
-                                            features can be found <a href="https://developer.spotify.com/web-api/get-audio-features/" target="_blank">
-                                                here
-                                            </a>. The only other feature included that was not provided in the web service was Decade, which was calculated
-                                            manually.
-                                        </li>
-                                    </ul>
-                                    <strong>Feature Extraction</strong>
-                                    <ul>
-                                        <li>
-                                            A <a href="https://msdn.microsoft.com/library/azure/dcaab0b2-59ca-4bec-bb66-79fd23540080" target="_blank">
-                                                Fisher Linear Discriminant Analysis
-                                            </a>  module was added to try to extract the best features before training.
-                                            The feature space was reduced to varying numbers of columns, but the neural network algorithm described in
-                                            the section below performed better without this preprocessing, so this module was ultimately removed.
-                                            The metrics that performance was judged on in these two scenarios were AUC and F1 Score. After removing
-                                            this feature extraction module AUC and F1 Scores increased from 0.863 to 0.887 and 0.838 to 0.853 respectively.
-                                        </li>
-                                        <li>
-                                            A <a href="https://msdn.microsoft.com/library/azure/2e010ee4-714e-44e9-933e-62d8c41818a9" target="_blank">
-                                                Permutation Feature Importance
-                                            </a> module was also added to quantify which of the features were least important
-                                            to the training algorithm's performance so that they could be removed from the feature space. Although the
-                                            features Tempo and Liveness scored 1 to 2 degrees of magnitude less than the other features, removing them
-                                            did little to affect AUC and F1 Scores, either increasing or decreasing them only a couple thousandths of a point.
-                                            Ultimately Tempo and Liveness were excluded from the feature set.
-                                        </li>
-                                        <li>
-                                            Features were also manually removed that subjectively might not affect a song's popularity, like Mode (major or minor modality),
-                                            Key Signature, or Time Signature. Different combinations of these being excluded from the feature space also did little
-                                            to significantly affect performance, with similar results to that of objectively removing unimportant features with the Permutation
-                                            Feature Importance module described above.
-                                        </li>
-                                    </ul>
-                                    <strong>Limitations</strong>
-                                    <ul>
-                                        <li>
-                                            Looking up a track by string did not always come up with a match in Spotify's library, particularly with
-                                            song collaborations.  Simple parsing was done on the strings of 'feat.' and 'ft'. to separate the primary artist
-                                            from the collaborating artist, but many more variations exist.  Examples include the designating the
-                                            collaborating artist in the song title, or the strings '&', 'and', or ',' between the artist, which doesn't always designate a
-                                            collaboration.  For instance, Tom Petty and the Heartbreakers is one artist, while Rihanna, Paul McCartney, and Kanye West
-                                            who collaborated on the song 'FourFiveSeconds' are three separate artists.
-                                        </li>
-                                        <li>
-                                            Additionally, some songs simply didn't have audio features available for them.
-                                        </li>
-                                    </ul>
-                                    <strong>Other remarks:</strong>
-                                    <ul>
-                                        <li>
-                                            Due to Spotify's Developer Terms of Use, trackIDs, track titles, and artists names were not collected or stored
-                                            when aggregating audio features and the collected data was discarded after the final training model was trained.
-                                        </li>
-                                    </ul>
-                                </div>
+                                <strong>Features</strong>
+                                <ul>
+                                    <li>
+                                        The following audio features were extracted for each sample using Spotify's Web API:
+                                        Danceability, Energy, Loudness, Mode, Speechiness, Acousticness,
+                                        Instrumentalness, Key Signature, Liveness, Valence, Duration, Time Signature.  Details on each of these
+                                        features can be found <a href="https://developer.spotify.com/web-api/get-audio-features/" target="_blank">
+                                            here
+                                        </a>. The only other feature included that was not provided in the web service was Decade, which was calculated
+                                        manually.
+                                    </li>
+                                </ul>
+                                <strong>Feature Extraction</strong>
+                                <ul>
+                                    <li>
+                                        A <a href="https://msdn.microsoft.com/library/azure/dcaab0b2-59ca-4bec-bb66-79fd23540080" target="_blank">
+                                            Fisher Linear Discriminant Analysis
+                                        </a>  module was added to try to extract the best features before training.
+                                        The feature space was reduced to varying numbers of columns, but the neural network algorithm described in
+                                        the section below performed better without this preprocessing, so this module was ultimately removed.
+                                        The metrics that performance was judged on in these two scenarios were AUC and F1 Score. After removing
+                                        this feature extraction module AUC and F1 Scores increased from 0.863 to 0.887 and 0.838 to 0.853 respectively.
+                                    </li>
+                                    <li>
+                                        A <a href="https://msdn.microsoft.com/library/azure/2e010ee4-714e-44e9-933e-62d8c41818a9" target="_blank">
+                                            Permutation Feature Importance
+                                        </a> module was also added to quantify which of the features were least important
+                                        to the training algorithm's performance so that they could be removed from the feature space. Although the
+                                        features Tempo and Liveness scored 1 to 2 degrees of magnitude less than the other features, removing them
+                                        did little to affect AUC and F1 Scores, either increasing or decreasing them only a couple thousandths of a point.
+                                        Ultimately Tempo and Liveness were excluded from the feature set.
+                                    </li>
+                                    <li>
+                                        Features were also manually removed that subjectively might not affect a song's popularity, like Mode (major or minor modality),
+                                        Key Signature, or Time Signature. Different combinations of these being excluded from the feature space also did little
+                                        to significantly affect performance, with similar results to that of objectively removing unimportant features with the Permutation
+                                        Feature Importance module described above.
+                                    </li>
+                                </ul>
+                                <strong>Limitations</strong>
+                                <ul>
+                                    <li>
+                                        Looking up a track by string did not always come up with a match in Spotify's library, particularly with
+                                        song collaborations.  Simple parsing was done on the strings of 'feat.' and 'ft'. to separate the primary artist
+                                        from the collaborating artist, but many more variations exist.  Examples include the designating the
+                                        collaborating artist in the song title, or the strings '&amp;', 'and', or ',' between the artist, which doesn't always designate a
+                                        collaboration.  For instance, Tom Petty and the Heartbreakers is one artist, while Rihanna, Paul McCartney, and Kanye West
+                                        who collaborated on the song 'FourFiveSeconds' are three separate artists.
+                                    </li>
+                                    <li>
+                                        Additionally, some songs simply didn't have audio features available for them.
+                                    </li>
+                                </ul>
+                                <strong>Other remarks:</strong>
+                                <ul>
+                                    <li>
+                                        Due to Spotify's Developer Terms of Use, trackIDs, track titles, and artists names were not collected or stored
+                                        when aggregating audio features and the collected data was discarded after the final training model was trained.
+                                    </li>
+                                </ul>
                             </div>
                         </div>
+                    </div>
 
-                        <!--Panel 3-->
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingThree">
-                                <h4 class="panel-title">
-                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                        Model <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                                <div class="panel-body">
-                                    <strong>Testing Methodology</strong>
-                                    <ul>
-                                        <li>
-                                            The five metrics were compared for every experiment were AUC, F1 Score, Precision, Recall, and Accuracy.  The
-                                            threshold for labeling a sample as positive or negative was 0.5.
-                                        </li>
-                                        <li>
-                                            These metrics were recorded using the averages of a 10 fold cross validation on the model and training data.
-                                        </li>
-                                    </ul>
+                    <!--Panel 3-->
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingThree">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Model <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                            <div class="panel-body">
+                                <strong>Testing Methodology</strong>
+                                <ul>
+                                    <li>
+                                        The five metrics were compared for every experiment were AUC, F1 Score, Precision, Recall, and Accuracy.  The
+                                        threshold for labeling a sample as positive or negative was 0.5.
+                                    </li>
+                                    <li>
+                                        These metrics were recorded using the averages of a 10 fold cross validation on the model and training data.
+                                    </li>
+                                </ul>
 
-                                    <strong>Two-class neural network</strong>
-                                    <ul>
-                                        <li>
-                                            Several binary classifying algorithms were tested, and the two-class neural network algorithm consistently performed
-                                            higher than the others in respect to all 5 metrics.  The other algorithms tested included variations on
-                                            support vector machines, Bayes point machines, logistic regression, and variations on decision tress, including
-                                            decision forests and decision jungles.
-                                        </li>
-                                        <li>
-                                            The <a href="https://msdn.microsoft.com/library/azure/ebc29f52-719d-4d0f-b66a-2ce85f527c7d" target="_blank">
-                                                default parameters
-                                            </a> in the Microsoft Azure Machine Learning Library were used for the neural network,
-                                            which is a fully connected network with one hidden layer of 100 nodes, a learning rate of 0.1, 100 learning
-                                            iterations, a momentum of 0, and an initial learning node weight of 0.1.  Tweaking these parameters
-                                            either decreased all 5 metrics or had an inconsistent increase or decrease of some of the metrics
-                                            by a couple thousandths of a point.
-                                            <ul>
-                                                <li>
-                                                    Increasing the number of nodes in the hidden layer two-fold and ten-fold decreased all five metrics by
-                                                    at least a tenth of a point.  The same outcome was seen when decreasing the learning rate
-                                                    to 0.04 and 0.08.
-                                                </li>
-                                                <li>
-                                                    Decreasing the number of nodes two-fold and four-fold either increased or decreased some of the 5 metrics
-                                                    by a couple thousandths of a point.  The same outcome was seen when increasing the number of learning iterations
-                                                    to 500 and 1000.
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <strong>Two-class neural network</strong>
+                                <ul>
+                                    <li>
+                                        Several binary classifying algorithms were tested, and the two-class neural network algorithm consistently performed
+                                        higher than the others in respect to all 5 metrics.  The other algorithms tested included variations on
+                                        support vector machines, Bayes point machines, logistic regression, and variations on decision tress, including
+                                        decision forests and decision jungles.
+                                    </li>
+                                    <li>
+                                        The <a href="https://msdn.microsoft.com/library/azure/ebc29f52-719d-4d0f-b66a-2ce85f527c7d" target="_blank">
+                                            default parameters
+                                        </a> in the Microsoft Azure Machine Learning Library were used for the neural network,
+                                        which is a fully connected network with one hidden layer of 100 nodes, a learning rate of 0.1, 100 learning
+                                        iterations, a momentum of 0, and an initial learning node weight of 0.1.  Tweaking these parameters
+                                        either decreased all 5 metrics or had an inconsistent increase or decrease of some of the metrics
+                                        by a couple thousandths of a point.
+                                        <ul>
+                                            <li>
+                                                Increasing the number of nodes in the hidden layer two-fold and ten-fold decreased all five metrics by
+                                                at least a tenth of a point.  The same outcome was seen when decreasing the learning rate
+                                                to 0.04 and 0.08.
+                                            </li>
+                                            <li>
+                                                Decreasing the number of nodes two-fold and four-fold either increased or decreased some of the 5 metrics
+                                                by a couple thousandths of a point.  The same outcome was seen when increasing the number of learning iterations
+                                                to 500 and 1000.
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
+                    </div>
 
-                        <!--Panel 4-->
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingFour">
-                                <h4 class="panel-title">
-                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                        Conclusions <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-                                <div class="panel-body">
-                                    <strong>Overall</strong>
-                                    <ul>
-                                        <li>
-                                            The final performance of the two-class neural network used is as follows:
-                                            <ul>
-                                                <li>AUC: 0.887</li>
-                                                <li>F1: 0.853</li>
-                                                <li>Precision: 0.820</li>
-                                                <li>Recall: 0.888</li>
-                                                <li>Accuracy: 0.816</li>
-                                            </ul>
-                                            Thus, there is evidence that there is a significant enough difference between songs that have or haven't been on the
-                                            Billboard Hot 100 chart to separate the two classes in the feature space provided by Spotify's APIs.  Some of those
-                                            features intuitively seem like they would contribute directly to a song's popularity like danceability, instrumentalness,
-                                            and valence or mood, which were some of the top features according to the analysis done in the
-                                            Permutation Feature Importance module.
-                                        </li>
-                                    </ul>
-                                    <strong>AUC vs. F1 Score</strong>
-                                    <ul>
-                                        <li>
-                                            While the final training data set included around 9,000 songs, other experiments included upwards of 15,000 songs.
-                                            The more songs that were added, the higher the accuracy and AUC was (the area under the curve of samples labeled as
-                                            True Positive  vs. False Positive).  However this was due to the fact the songs added were all in the negative class;
-                                            there is only a finite number of songs that can be labeled as positive, and all the songs that have been on
-                                            the Hot 100 chart were already added. At 15,000 songs, less than a third were positive samples.  Thus, while the model
-                                            got better at labeling negative samples, the other metrics precision and recall decreased, as well as F1 score, which
-                                            is the weighted average of the two.
-                                        </li>
-                                    </ul>
-                                    <strong>Decade</strong>
-                                    <ul>
-                                        <li>
-                                            Another effect of adding more songs to the training set was that the majority of songs in Spotify's curated
-                                            playlists are skewed towards more recent decades.  Thus, because these added songs were mostly in the
-                                            decade category of 2000's and 2010's and were negative examples, songs from earlier decades were
-                                            more likely to labeled as positive.  This was identified after using the Permutation Feature Importance
-                                            module when the decade feature consistently had scores an order of magnitude larger than the others.
-                                        </li>
-                                    </ul>
-                                    <strong>Future Considerations</strong>
-                                    <ul>
-                                        <li>
-                                            The <a href="http://labrosa.ee.columbia.edu/millionsong/" target="_blank"> Million Song Dataset </a>
-                                            could also be explored, which was created in 2011 by researchers at Columbia with data from The Echo
-                                            Nest.  However, the features in the database are similar since The Echo Nest was later acquired by Spotify in 2014.
-                                        </li>
-                                        <li>
-                                            Given a suitable database, the lyrical analysis mentioned in the introduction could be explored again.
-                                        </li>
-                                        <li>
-                                            More rigorous parsing of song titles and artists could be done to address the limitations previously
-                                            mentioned around the variations when describing song collaborations.  Although the number of songs
-                                            that could not be found due to this limitation were small relatively to the overall size of the
-                                            training and testing sets, a boolean feature designating a song collaboration could be explored
-                                            in the future.
-                                        </li>
-                                        <li>
-                                            Many other features could be taken into consideration like genre, music label, what quarter of the year
-                                            a song was released (summer vs winter holidays), artist's age, artist's number of active years.
-                                        </li>
-                                    </ul>
-                                </div>
+                    <!--Panel 4-->
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingFour">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    Conclusions <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                            <div class="panel-body">
+                                <strong>Overall</strong>
+                                <ul>
+                                    <li>
+                                        The final performance of the two-class neural network used is as follows:
+                                        <ul>
+                                            <li>AUC: 0.887</li>
+                                            <li>F1: 0.853</li>
+                                            <li>Precision: 0.820</li>
+                                            <li>Recall: 0.888</li>
+                                            <li>Accuracy: 0.816</li>
+                                        </ul>
+                                        Thus, there is evidence that there is a significant enough difference between songs that have or haven't been on the
+                                        Billboard Hot 100 chart to separate the two classes in the feature space provided by Spotify's APIs.  Some of those
+                                        features intuitively seem like they would contribute directly to a song's popularity like danceability, instrumentalness,
+                                        and valence or mood, which were some of the top features according to the analysis done in the
+                                        Permutation Feature Importance module.
+                                    </li>
+                                </ul>
+                                <strong>AUC vs. F1 Score</strong>
+                                <ul>
+                                    <li>
+                                        While the final training data set included around 9,000 songs, other experiments included upwards of 15,000 songs.
+                                        The more songs that were added, the higher the accuracy and AUC was (the area under the curve of samples labeled as
+                                        True Positive  vs. False Positive).  However this was due to the fact the songs added were all in the negative class;
+                                        there is only a finite number of songs that can be labeled as positive, and all the songs that have been on
+                                        the Hot 100 chart were already added. At 15,000 songs, less than a third were positive samples.  Thus, while the model
+                                        got better at labeling negative samples, the other metrics precision and recall decreased, as well as F1 score, which
+                                        is the weighted average of the two.
+                                    </li>
+                                </ul>
+                                <strong>Decade</strong>
+                                <ul>
+                                    <li>
+                                        Another effect of adding more songs to the training set was that the majority of songs in Spotify's curated
+                                        playlists are skewed towards more recent decades.  Thus, because these added songs were mostly in the
+                                        decade category of 2000's and 2010's and were negative examples, songs from earlier decades were
+                                        more likely to labeled as positive.  This was identified after using the Permutation Feature Importance
+                                        module when the decade feature consistently had scores an order of magnitude larger than the others.
+                                    </li>
+                                </ul>
+                                <strong>Future Considerations</strong>
+                                <ul>
+                                    <li>
+                                        The <a href="http://labrosa.ee.columbia.edu/millionsong/" target="_blank"> Million Song Dataset </a>
+                                        could also be explored, which was created in 2011 by researchers at Columbia with data from The Echo
+                                        Nest.  However, the features in the database are similar since The Echo Nest was later acquired by Spotify in 2014.
+                                    </li>
+                                    <li>
+                                        Given a suitable database, the lyrical analysis mentioned in the introduction could be explored again.
+                                    </li>
+                                    <li>
+                                        More rigorous parsing of song titles and artists could be done to address the limitations previously
+                                        mentioned around the variations when describing song collaborations.  Although the number of songs
+                                        that could not be found due to this limitation were small relatively to the overall size of the
+                                        training and testing sets, a boolean feature designating a song collaboration could be explored
+                                        in the future.
+                                    </li>
+                                    <li>
+                                        Many other features could be taken into consideration like genre, music label, what quarter of the year
+                                        a song was released (summer vs winter holidays), artist's age, artist's number of active years.
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -416,5 +412,4 @@
             </div>
         </div>
     </div>
-</body>
-</html>
+</div>
