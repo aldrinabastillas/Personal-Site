@@ -1,10 +1,8 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
-using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading;
@@ -127,7 +125,7 @@ namespace WebAppPortfolio.Classes
                 }
                 catch (Exception ex)
                 {
-                    Trace.WriteLine(ex); //write to errors.xml file specified in Web.config
+                    Trace.WriteLine("Error in SpotifyController: " + ex.Message);
                 }
                 return accessToken;
             }
@@ -168,8 +166,7 @@ namespace WebAppPortfolio.Classes
                     }
                     else
                     {
-                        //Trace.WriteLine(ex); //write to errors.xml file specified in Web.config
-                        //LogWarning("Error in SpotifyController: " +  ex.Message);
+                        Trace.TraceError("Error in SpotifyController: " + ex.Message);
                     }
                 }
             }

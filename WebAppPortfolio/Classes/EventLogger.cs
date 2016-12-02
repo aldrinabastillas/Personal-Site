@@ -22,15 +22,16 @@ namespace WebAppPortfolio.Classes
         #region Constructors
         /// <summary>
         /// Creates the event source and event log
+        /// Only works on local machine with admin privileges
+        /// Redundant in Azure as framework already handles this
         /// </summary>
         public EventLogger()
         {
-            //TODO: Change to Trace so that it can be used in Azure
-            //if (!EventLog.SourceExists(appName))
-            //{
-            //    EventLog.CreateEventSource(appName, "EventLogs");
-            //}
-            //log = new EventLog();
+            if (!EventLog.SourceExists(appName))
+            {
+                EventLog.CreateEventSource(appName, "EventLogs");
+            }
+            log = new EventLog();
             eventId = 0;
             log.Source = appName;
         }

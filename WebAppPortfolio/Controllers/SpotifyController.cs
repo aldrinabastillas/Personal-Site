@@ -1,22 +1,17 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Caching;
 using System.Web.Configuration;
 using System.Web.Mvc;
-using WebAppPortfolio.Models;
 using WebAppPortfolio.Classes;
+using WebAppPortfolio.Models;
 
 namespace WebAppPortfolio.Controllers
 {
@@ -41,7 +36,7 @@ namespace WebAppPortfolio.Controllers
                 HttpRuntime.Cache["AccessToken"] = accessToken;
             }
 
-            //logger = new EventLogger();
+            //logger = new EventLogger(); //unnecessary in Azure
 
             return View("Index", "_Layout");
         }
@@ -123,7 +118,7 @@ namespace WebAppPortfolio.Controllers
                 }
                 else
                 {
-                    //LogWarning("Failed with status code: " + response.StatusCode);
+                    Trace.TraceWarning("Failed with status code: " + response.StatusCode);
                     result = "Try again: Microsoft Azure Machine Learning web service returned an error.";
                 }
             }
@@ -132,21 +127,10 @@ namespace WebAppPortfolio.Controllers
         #endregion
 
         #region Error Handlers
-        //protected override void OnException(ExceptionContext exceptionContext)
-        //{
-        //    base.OnException(exceptionContext); //call handler in HomeController
-        //}
-
-        //private static void LogWarning(string message)
-        //{
-        //    if (logger == null)
-        //    {
-        //        logger = new EventLogger();
-        //    }
-
-        //    logger.LogWarning(message);
-        //}
-
+        protected override void OnException(ExceptionContext exceptionContext)
+        {
+            base.OnException(exceptionContext); //call handler in HomeController
+        }
         #endregion
 
     }
