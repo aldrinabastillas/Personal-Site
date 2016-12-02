@@ -51,7 +51,7 @@ footer h4{
 }
 
 #predictionSection {
-    min-height: 410px;
+    height: 410px;
     text-align: center;
     vertical-align: middle;
 }
@@ -72,7 +72,7 @@ footer h4{
 
 #billboardTable {
     overflow-y: scroll;
-    max-height: 335px;
+    height: 335px;
 }
 
 #accordion li {
