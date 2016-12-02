@@ -1,8 +1,4 @@
 ﻿/*#region Colors*/
-html{
-    background-color: black;
-}
-
 footer h4{
     color: white
 }
@@ -37,6 +33,10 @@ footer h4{
 
 #spotifyNavbar .container{
     margin-left: 8px;
+}
+
+#spotifyNavbar .navbar-brand{
+    display: inline; /*Defaulted to none from Home page*/
 }
 /*#endregion*/
 

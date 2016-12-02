@@ -512,6 +512,7 @@ th {
 html,
 body {
   height: 100%;
+  background-color: black;
 }
 
 html {
@@ -523,7 +524,6 @@ body {
   padding: 0px;
   overflow-x: hidden;
   min-width: 320px;
-  background: #FFFFFF;
   /*font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;*/
   font-family: 'Open Sans', sans-serif;
   font-size: 14px;
