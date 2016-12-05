@@ -35,8 +35,10 @@ footer h4{
     margin-left: 8px;
 }
 
-#spotifyNavbar .navbar-brand{
-    display: inline; /*Defaulted to none from Home page*/
+@media (max-width: 767px) {
+    #spotifyNavbar .navbar-brand{
+        display: none;
+    }
 }
 /*#endregion*/
 
