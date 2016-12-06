@@ -133,7 +133,8 @@
                                 <ul>
                                     <li>
                                         This is an experiment to see if there are distinguishing factors that make certain
-                                        songs more popular than others.
+                                        songs more popular than others.  This is purely for educational purposes, and for a
+                                        chance to explore a dataset and apply data science processes. 
                                     </li>
                                     <li>
                                         The original hypotheses about the biggest contributers to popularity revolved around
@@ -353,11 +354,21 @@
                                             <li>Recall: 0.888</li>
                                             <li>Accuracy: 0.816</li>
                                         </ul>
+                                    </li>
+                                    <li>
                                         Thus, there is evidence that there is a significant enough difference between songs that have or haven't been on the
                                         Billboard Hot 100 chart to separate the two classes in the feature space provided by Spotify's APIs.  Some of those
                                         features intuitively seem like they would contribute directly to a song's popularity like danceability, instrumentalness,
-                                        and valence or mood, which were some of the top features according to the analysis done in the
+                                        and valence (mood), which were some of the top features according to the analysis done in the
                                         Permutation Feature Importance module.
+                                    </li>
+                                    <li>
+                                        Of course, these are just predictions based on a small subset of features that can't capture everything that could contribute
+                                        to a song's popularity.  For example, 'Hello' by Adele scores a prediction of '81.60% not likely to be a Billboard Hot 100 Song'
+                                        with values of 0.481 for Danceability and 0.451 for Energy, even though it debuted and number one on the Billboard 100 100
+                                        as well as in <a href="https://en.wikipedia.org/wiki/Hello_(Adele_song)#Weekly_charts" target="_blank">almost every country</a> 
+                                        it charted in.  Contrast this with another number one single 'Fancy' by Iggy Azalea ft. Charlie XCX which has values of
+                                        0.911 for Danceability and 0.709 for energy.        
                                     </li>
                                 </ul>
                                 <strong>AUC vs. F1 Score</strong>

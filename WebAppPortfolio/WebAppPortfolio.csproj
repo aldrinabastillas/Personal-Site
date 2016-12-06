@@ -255,6 +255,7 @@
       <DependentUpon>Billboard100SongsAzure.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\aldrinabastillas.pubxml" />
+    <Content Include="README.md" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -300,7 +301,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
   </ItemGroup>
