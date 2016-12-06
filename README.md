@@ -1,19 +1,19 @@
 # [aldrinabastillas.com](http://www.aldrinabastillas.com)
 
 ## Background
-This is my personal site with a link to my Billboard Hot 100 Predictor project, links to past projects and contact information.  
+This is my personal site with a link to my Billboard Hot 100 Predictor project, links to past projects and contact infor,mation.  
 
 
 ## Files
-Notable files include
+Notable files include:
 
 #### Server Side
 * [WebAppPortfolio/Controllers/HomeController.cs](https://github.com/aldrinabastillas/Personal-Site/blob/master/WebAppPortfolio/Controllers/HomeController.cs):
   Returns the home page.
 * [WebAppPortfolio/Controllers/SpotifyController.cs](https://github.com/aldrinabastillas/Personal-Site/blob/master/WebAppPortfolio/Controllers/SpotifyController.cs):
-  Returns the predictor page, calls the machine learning web service, and queries the database with Entity.
+  Returns the predictor app's page, calls the machine learning web service, and queries the database with Entity.
 * [WebAppPortfolio/Classes/SpotifyAPIs.cs](https://github.com/aldrinabastillas/Personal-Site/blob/master/WebAppPortfolio/Classes/SpotifyAPIs.cs):
-  Wrappers around the Spotify Web APIs, that uses asynchronous tasks to call them and Json.NET to deserialize the response.
+  Wrappers around the Spotify Web APIs, that use asynchronous tasks to call them and Json.NET to deserialize the response.
 
 #### Markup
 * [WebAppPortfolio/Views/Shared/_Layout.cshtml](https://github.com/aldrinabastillas/Personal-Site/blob/master/WebAppPortfolio/Views/Shared/_Layout.cshtml):
@@ -25,11 +25,11 @@ Notable files include
 
 #### Client Behavior
 * [WebAppPortfolio/Scripts/Spotify/Spotify.js](https://github.com/aldrinabastillas/Personal-Site/blob/master/WebAppPortfolio/Scripts/Spotify/Spotify.js):
-  Predictor app's client behavior code.  Includes code to free-text search the Spotify library, 
-  display results from the machine learning web service, and display results from querying SQL with Entity.
+  Predictor app's client behavior code to search the Spotify library, display results from the machine learning web service, 
+  and display results from querying the SQL database with Entity.
 
 ## Things I Learned
-List of new things I had to learn, issues I encountered during this project, or concepts I realized in general.
+List of new things I had to learn, issues I encountered during this project, or concepts realized in general.
 
 #### Data Science
 * Higher accuracy doesn't necessarily lead to a better model.  In this case, accuracy was increasing
@@ -39,8 +39,8 @@ of true positives.
 [link1](https://docs.microsoft.com/en-us/azure/machine-learning/machine-learning-evaluate-model-performance#evaluating-a-binary-classification-model)
 and [link2](https://blogs.msdn.microsoft.com/andreasderuiter/2015/02/09/performance-measures-in-azure-ml-accuracy-precision-recall-and-f1-score/).
 * How to extrapolate quanitfiable data to describe subjective qualities, like using the Billboard Hot 100 chart as a proxy for popularity.
-* Difficulties with obtaining a data set with exactly the features you want and how to change your hypotheses based on what is available.
-* A more in depth discussion can be found in the accordion panels at the bottom of the [app](http://aldrinabastillas.com/Spotify/Index)
+* Difficulties with obtaining a data set with exactly the features you want and how to change your hypotheses based on what data is available.
+* A more in depth discussion can be found in the panels at the bottom of the [app](http://aldrinabastillas.com/Spotify/Index)
 
 #### Web apps
 * How to use asynchronous tasks to consume web services
