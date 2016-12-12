@@ -1,7 +1,7 @@
 # [aldrinabastillas.com](http://www.aldrinabastillas.com)
 
 ## Background
-This is my personal site with a link to my Billboard Hot 100 Predictor project, links to past projects and contact infor,mation.  
+This is my personal site with a link to my Billboard Hot 100 Predictor project, audio visualizer project, and links to past projects and contact information.  
 
 
 ## Files
@@ -22,6 +22,8 @@ Notable files include:
   The home page's HTML
 * [WebAppPortfolio/Views/Spotify/Index.cshtml](https://github.com/aldrinabastillas/Personal-Site/blob/master/WebAppPortfolio/Views/Spotify/Index.cshtml):
   The Billboard Hot 100 Predictor App's HTML
+  * [WebAppPortfolio/Views/Home/_Visualizer.cshtml](https://github.com/aldrinabastillas/Personal-Site/blob/master/WebAppPortfolio/Views/Home/_Visualizer.cshtml):
+  The modal pop-up for the audio visualizer.
 
 #### Client Behavior
 * [WebAppPortfolio/Scripts/Spotify/Spotify.js](https://github.com/aldrinabastillas/Personal-Site/blob/master/WebAppPortfolio/Scripts/Spotify/Spotify.js):
@@ -50,11 +52,18 @@ and [link2](https://blogs.msdn.microsoft.com/andreasderuiter/2015/02/09/performa
 * How to resolve virtual directory paths when bundled CSS files link to other files in the solution
 * How to write to the Windows Event Log and to a trace file
 
-## Technologies
+#### Game Development 
+* How to use different programming paradigms like working with Unity's 
+  [event functions](https://docs.unity3d.com/Manual/ExecutionOrder.html) rather than using traditional OOP
+  concepts, like constructors for example.
+* How and when to implement creational design patterns, like the Factory Method pattern.
+* Basic vector algebra
 
+## Technologies
 * Web-app framework: [ASP.NET MVC](https://www.asp.net/mvc)
 * Front-end frameworks: [Bootstrap](http://getbootstrap.com/), [AngularJS](https://angularjs.org/),
 					   [Semantic UI](http://semantic-ui.com/)
+* Game engine: [Unity3D](https://unity3d.com/)
 * Database: [Microsoft SQL in Azure](https://azure.microsoft.com/en-us/services/sql-database/), 
             [Entity Framework](https://www.asp.net/entity-framework)
 * Home page layout: [Start Bootstrap](https://startbootstrap.com/template-overviews/grayscale/)

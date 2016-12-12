@@ -195,6 +195,7 @@
     <Content Include="Content\Home.css" />
     <Content Include="Content\images\billboard.jpg" />
     <Content Include="Content\images\alaska.jpg" />
+    <Content Include="Content\images\visualizer.gif" />
     <Content Include="Content\images\madison.jpg" />
     <Content Include="Content\Semantic-UI\components\icon.css" />
     <Content Include="Content\Semantic-UI\components\icon.min.css" />
@@ -211,6 +212,7 @@
     <Content Include="Content\Semantic-UI\semantic.min.css" />
     <Content Include="Content\Semantic-UI\semantic.min.js" />
     <Content Include="Content\Semantic-UI\themes\default\assets\fonts\icons.svg" />
+    <Content Include="Content\_Visualizer.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -295,6 +297,7 @@
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="Views\Spotify\Index.cshtml" />
     <Content Include="Scripts\version.json" />
+    <Content Include="Views\Home\_Visualizer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

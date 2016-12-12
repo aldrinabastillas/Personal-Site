@@ -15,8 +15,9 @@ namespace WebAppPortfolio.Controllers
         /// Returns the main landing page: Views/Home/Index.cshtml
         /// Page is cached in browser for 5 mins
         /// </summary>
-        /// <returns></returns>
-        [OutputCache(Duration = 300)]
+        #if (!DEBUG)
+            [OutputCache(Duration = 300)]
+        #endif
         public virtual ActionResult Index()
         {
             //logger = new EventLogger(); //unnecessary in Azure
@@ -24,9 +25,20 @@ namespace WebAppPortfolio.Controllers
         }
 
         /// <summary>
+        /// Returns the Visualizer page: Views/Home/Visualizer.cshtml
+        /// Page is cached in browser for 5 mins
+        /// </summary>
+        #if (!DEBUG)
+            [OutputCache(Duration = 300)]
+        #endif
+        public virtual ActionResult Visualizer()
+        {
+            return View("Visualizer");
+        }
+
+        /// <summary>
         /// Test writing to the error log
         /// </summary>
-        /// <returns></returns>
         public EmptyResult TestError()
         {
             //var exception = new Exception("Testing Error Logger");

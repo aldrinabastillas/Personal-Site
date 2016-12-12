@@ -1,0 +1,33 @@
+﻿<div class="modal-body">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <!-- Tab Menu -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active">
+            <a href="#youtubeTab" aria-controls="youtubeTab" role="tab" data-toggle="tab">
+                YouTube <i class="fa fa-youtube-play" aria-hidden="true"></i>
+            </a>
+        </li>
+        <li role="presentation">
+            <a href="#downloadTab" aria-controls="downloadTab" role="tab" data-toggle="tab">
+                Download <i class="fa fa-download" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+
+    <!-- Tab Panes -->
+    <div class="tab-content">
+        <br />
+        <!-- YouTube Pane -->
+        <div role="tabpanel" class="tab-pane fade in active" id="youtubeTab">
+            <p>A demo video with low resolution and frame rate.</p>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/Rgu4TiTfQYs" frameborder="0" allowfullscreen></iframe>
+        </div>
+
+        <!-- Download Pane -->
+        <div role="tabpanel" class="tab-pane fade" id="downloadTab">
+            <p>Executables that allow you to adjust resolution and frame-rate.</p>
+            <a href="https://github.com/aldrinabastillas/Audio-Visualizer/raw/master/AudioVisualizer.exe.zip" class="btn btn-default">Windows <i class="fa fa-windows" aria-hidden="true"></i></a>
+            <a href="https://github.com/aldrinabastillas/Audio-Visualizer/raw/master/AudioVisualizer.app.zip" class="btn btn-default">Mac <i class="fa fa-apple" aria-hidden="true"></i></a>
+        </div>
+    </div>
+</div>

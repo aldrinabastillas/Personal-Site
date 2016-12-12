@@ -57,7 +57,7 @@
         <div class="col-lg-8 col-lg-offset-2">
             <h2>Projects</h2>
             <h3>Billboard Hot 100 Predictor</h3>
-            <div id="billboardImage">
+            <div class="projectThumb" id="billboardImage">
                 <div class="overlay">
                     <a href="~/Spotify/Index">
                         <i class="fa fa-play-circle fa-4x" aria-hidden="true"></i>
@@ -67,11 +67,36 @@
             <br />
             <p>
                 Predict if a song would be on the Billboard Hot 100 chart! <br />
-                Uses ASP.NET MVC, Microsoft Azure Machine Learning Studio, and Spotify Web APIs.
+                Built with ASP.NET MVC, Microsoft Azure Machine Learning Studio, and Spotify Web APIs.
+            </p>
+            <br /><br />
+
+            <h3>Lorenz System Audio Visualizer</h3>
+            <div class="projectThumb" id="visualizerGif">
+                <div class="overlay">
+                    <a href="" type="button" data-toggle="modal" data-target="#myModal">
+                        <i class="fa fa-play-circle fa-4x" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+            <br />
+            <p>
+                An audio visualizer based on the Lorenz System of equations. <br/>
+                Built in Unity3D.
             </p>
             <br />
+
+            <!-- Visualizer Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        @Html.Partial("_Visualizer")
+                    </div>
+                </div>
+            </div>
+
             <h2>Past Projects</h2>
-            <p>See details on 
+            <p>For the code to the projects above, as well as older ones, see
                 <a href="https://github.com/aldrinabastillas" target="_blank">
                     Github <i class="fa fa-github" aria-hidden="true"></i> &nbsp;!
                 </a>
@@ -98,6 +123,7 @@
     </div>
 </section>
 
+<!-- Images -->
 <section id="images">
     <h6>Images</h6>
     <p>
@@ -105,5 +131,4 @@
         <br />
         Skyline of Madison, WI, taken from the center of <a href="https://www.mononaterrace.com/" target="_blank">Lake Monona</a> on 6/2015.
     </p>
-    
 </section>

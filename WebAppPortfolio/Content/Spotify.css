@@ -30,16 +30,6 @@ footer h4{
 .ui.sortable.table thead th{
     color: #42DCA3;
 }
-
-#spotifyNavbar .container{
-    margin-left: 8px;
-}
-
-@media (max-width: 767px) {
-    #spotifyNavbar .navbar-brand{
-        display: none;
-    }
-}
 /*#endregion*/
 
 /*#region Layout / Text*/

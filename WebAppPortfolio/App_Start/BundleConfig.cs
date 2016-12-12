@@ -26,7 +26,8 @@ namespace WebAppPortfolio
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/Spotify.css"));
+                      "~/Content/Spotify.css",
+                      "~/Content/_Visualizer.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/SpotifyPage").Include(
                       "~/Scripts/angular.js",  //must come before Spotify.js
