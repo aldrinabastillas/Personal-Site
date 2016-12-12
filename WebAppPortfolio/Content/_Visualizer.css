@@ -1,10 +1,10 @@
 ﻿/*#region General Styles*/
-.modal-body p{
+.modal-body p {
     font-size: 15px;
     margin-bottom: 20px;
 }
 
-.modal-body a{
+.modal-body a {
     font-size: 13px;
     text-transform: uppercase;
     font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -13,8 +13,20 @@
     text-shadow: none;
 }
 
-.modal-body iframe{
-    width: 100%;
-    height: 100%;
+/* Responsive YouTube iframe
+     from https://www.smashingmagazine.com/2014/02/making-embedded-content-work-in-responsive-design/ */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
 }
+
+    .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
 /*#endregion General Styles*/
