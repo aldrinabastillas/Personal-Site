@@ -22,7 +22,7 @@ Notable files include:
   The home page's HTML
 * [WebAppPortfolio/Views/Spotify/Index.cshtml](https://github.com/aldrinabastillas/Personal-Site/blob/master/WebAppPortfolio/Views/Spotify/Index.cshtml):
   The Billboard Hot 100 Predictor App's HTML
-  * [WebAppPortfolio/Views/Home/_Visualizer.cshtml](https://github.com/aldrinabastillas/Personal-Site/blob/master/WebAppPortfolio/Views/Home/_Visualizer.cshtml):
+* [WebAppPortfolio/Views/Home/_Visualizer.cshtml](https://github.com/aldrinabastillas/Personal-Site/blob/master/WebAppPortfolio/Views/Home/_Visualizer.cshtml):
   The modal pop-up for the audio visualizer.
 
 #### Client Behavior
