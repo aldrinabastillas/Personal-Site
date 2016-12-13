@@ -1,7 +1,9 @@
 /*!
  * Start Bootstrap - Grayscale Bootstrap Theme (http://startbootstrap.com)
  * Code licensed under the Apache License v2.0.
- * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Referenced in /Views/Home/Index.cshtml
  */
 
 // jQuery to collapse the navbar on scroll
@@ -30,4 +32,9 @@ $(function() {
 // Closes the Responsive Menu on Menu Item Click
 $('.navbar-collapse ul li a').click(function() {
     $(this).closest('.collapse').collapse('toggle');
+});
+
+//Activate tooltips
+$(function () {
+    $("[data-toggle='tooltip']").tooltip();
 });

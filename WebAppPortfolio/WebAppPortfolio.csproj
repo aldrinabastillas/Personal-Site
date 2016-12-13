@@ -256,12 +256,13 @@
     <Content Include="Models\Billboard100SongsAzure.edmx.diagram">
       <DependentUpon>Billboard100SongsAzure.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\documents\Aldrin F Abastillas - Resume 2016.pdf" />
     <None Include="Properties\PublishProfiles\aldrinabastillas.pubxml" />
     <Content Include="README.md" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\grayscale.js" />
+    <Content Include="Scripts\Home.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
