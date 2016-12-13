@@ -25,18 +25,6 @@ namespace WebAppPortfolio.Controllers
         }
 
         /// <summary>
-        /// Returns the Visualizer page: Views/Home/Visualizer.cshtml
-        /// Page is cached in browser for 5 mins
-        /// </summary>
-        #if (!DEBUG)
-            [OutputCache(Duration = 300)]
-        #endif
-        public ActionResult Visualizer()
-        {
-            return View("Visualizer");
-        }
-
-        /// <summary>
         /// Download link for resume PDF
         /// See https://msdn.microsoft.com/en-us/library/dd492593(v=vs.98).aspx
         /// </summary>
