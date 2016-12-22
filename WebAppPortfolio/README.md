@@ -1,7 +1,7 @@
 # [aldrinabastillas.com](http://www.aldrinabastillas.com)
 
 ## Background
-This is my personal site with a link to my Billboard Hot 100 Predictor project, audio visualizer project, and links to past projects and contact information.  
+This is my personal site with a link to my Billboard Hot 100 Predictor project, audio visualizer project, links to past projects, and contact information.  
 
 
 ## Files

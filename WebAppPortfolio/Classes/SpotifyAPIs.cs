@@ -89,12 +89,15 @@ namespace WebAppPortfolio.Classes
         /// <returns></returns>
         public static string GetSpotifyAccessToken()
         {
+            //First check if in cache and return
             string accessToken = HttpRuntime.Cache["AccessToken"] as string;
-            if (!string.IsNullOrWhiteSpace(accessToken))
+            string expireTime = HttpRuntime.Cache["ExpireTime"] as string;
+            if (!string.IsNullOrWhiteSpace(accessToken) && DateTime.Now > DateTime.Parse(expireTime))
             {
                 return accessToken;
             }
 
+            //not in cache, need to retrieve
             Uri uri = new Uri("https://accounts.spotify.com/api/token");
             string privateKey = WebConfigurationManager.AppSettings["SpotifyPrivateAppKey"];
             string clientID = WebConfigurationManager.AppSettings["SpotifyClientID"];
@@ -115,18 +118,21 @@ namespace WebAppPortfolio.Classes
                 byte[] response;
                 try
                 {
+                    //convert byte response to string, then to a JSON object
                     response = client.UploadValues(uri, "POST", data);
                     JObject obj = JsonConvert.DeserializeObject<JObject>(Encoding.Default.GetString(response));
-                    if (obj.HasValues)
-                    {
-                        JToken jToken = obj.SelectToken("$.access_token");
-                        accessToken = jToken.ToString();
-                    }
+                    accessToken = GetJTokenValue(obj, "access_token");
+                    string seconds = GetJTokenValue(obj, "expires_in");
+                    expireTime = GetExpireTime(seconds);
+
+                    HttpRuntime.Cache["AccessToken"] = accessToken; //save in cache!
+                    HttpRuntime.Cache["ExpireTime"] = expireTime; 
                 }
                 catch (Exception ex)
                 {
                     Trace.WriteLine("Error in SpotifyController: " + ex.Message);
                 }
+                
                 return accessToken;
             }
         }
@@ -171,6 +177,34 @@ namespace WebAppPortfolio.Classes
                 }
             }
             return obj;
+        }
+
+        /// <summary>
+        /// Given a JSON Object, return the value for a given token
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        private static string GetJTokenValue(JObject obj, string token)
+        {
+            string value = "";
+            if (obj.HasValues)
+            {
+                JToken jToken = obj.SelectToken("$." + token);
+                value = jToken.ToString();
+            }
+            return value;
+        }
+
+        /// <summary>
+        /// Given a string of seconds, return the current time plus those seconds
+        /// </summary>
+        /// <param name="expires_in"></param>
+        /// <returns></returns>
+        private static string GetExpireTime(string expires_in)
+        {
+            int seconds = Convert.ToInt32(expires_in); //default to 0 seconds
+            return DateTime.Now.AddSeconds(seconds).ToString();
         }
         #endregion
     }

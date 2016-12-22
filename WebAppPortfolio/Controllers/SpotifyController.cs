@@ -30,12 +30,8 @@ namespace WebAppPortfolio.Controllers
         [OutputCache(Duration = 300)]
         public override ActionResult Index()
         {
-            string accessToken = SpotifyAPIs.GetSpotifyAccessToken();
-            if (!string.IsNullOrWhiteSpace(accessToken))
-            {
-                HttpRuntime.Cache["AccessToken"] = accessToken;
-            }
-
+            //loads access token into cache
+            SpotifyAPIs.GetSpotifyAccessToken();
             //logger = new EventLogger(); //unnecessary in Azure
 
             return View("Index", "_Layout");

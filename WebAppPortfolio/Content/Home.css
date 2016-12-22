@@ -55,7 +55,7 @@ a {
     transition: all 0.2s ease-in-out;
 }
 
-    a:focus, a:hover {
+    a:hover {
         color: #42DCA3;
         text-decoration: none;
     }
