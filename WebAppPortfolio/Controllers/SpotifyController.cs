@@ -28,7 +28,7 @@ namespace WebAppPortfolio.Controllers
         /// </summary>
         /// <returns></returns>
         [OutputCache(Duration = 300)]
-        public override ActionResult Index()
+        public override ViewResult Index()
         {
             //loads access token into cache
             SpotifyAPIs.GetSpotifyAccessToken();

@@ -18,10 +18,11 @@ namespace WebAppPortfolio.Controllers
         #if (!DEBUG)
             [OutputCache(Duration = 300)]
         #endif
-        public virtual ActionResult Index()
+        public virtual ViewResult Index()
         {
             //logger = new EventLogger(); //unnecessary in Azure
-            return View();
+
+            return View("Index"); //explicitly naming Index page only need for Unit Tests
         }
 
         /// <summary>
