@@ -28,17 +28,8 @@ namespace WebAppPortfolio.Controllers
 
         /// <summary>
         /// Download link for resume PDF
-        /// Uses a default argument of the ServerPathProvider implementation of IPathProvider
-        /// </summary>
-        /// <returns></returns>
-        public FileResult Resume()
-        {
-            return Resume(new ServerPathProvider());
-        }
-
-        /// <summary>
-        /// Download link for resume PDF
         /// See https://msdn.microsoft.com/en-us/library/dd492593(v=vs.98).aspx
+        /// Uses ServerPathProvider implementation of IPathProvider in RouteConfig.cs
         /// </summary>
         public FileResult Resume(IPathProvider pathProvider)
         {
@@ -48,12 +39,10 @@ namespace WebAppPortfolio.Controllers
         }
 
         /// <summary>
-        /// Test writing to the error log
+        /// Test writing to the error log by navigating to /Home/TestError
         /// </summary>
         public EmptyResult TestError()
         {
-            //var exception = new Exception("Testing Error Logger");
-            //OnException(new ExceptionContext(this.ControllerContext, exception));
             Trace.TraceError("Testing Error Logger");
             return null;
         }
@@ -66,13 +55,8 @@ namespace WebAppPortfolio.Controllers
         /// <param name="exceptionContext"></param>
         protected override void OnException(ExceptionContext exceptionContext)
         {
-            //if (logger == null)
-            //{
-            //    logger = new EventLogger();
-            //}
-
-            string message = (exceptionContext.Exception.Message != null) ? exceptionContext.Exception.Message : "No ex message" + this.ToString();
-            //logger.LogException("Error in HomeController: " + message);
+            string message = (exceptionContext.Exception.Message != null) ? 
+                exceptionContext.Exception.Message : "No exception message: " + this.ToString();
             Trace.TraceError("Error in HomeController: " + message);
         }
         #endregion

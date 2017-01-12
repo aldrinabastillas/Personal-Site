@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using WebAppPortfolio.Interfaces;
 
-namespace WebAppPortfolioTests.Classes
+namespace WebAppPortfolioTests.MockClasses
 {
     public class TestPathProvider : IPathProvider
     {

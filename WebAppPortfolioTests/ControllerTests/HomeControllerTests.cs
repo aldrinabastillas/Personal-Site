@@ -1,17 +1,14 @@
 ﻿using System.Web.Mvc;
-//using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
 using WebAppPortfolio.Controllers;
-using WebAppPortfolioTests.Classes;
+using WebAppPortfolioTests.MockClasses;
 
-namespace WebAppPortfolioTests
+namespace WebAppPortfolioTests.ControllerTests
 {
     [TestFixture]
-    //[TestClass]
     public class HomeControllerTests
     {
         [Test]
-        //[TestMethod]
         public void TestIndex()
         {
             var controller = new HomeController(); //Arrange
@@ -20,7 +17,6 @@ namespace WebAppPortfolioTests
         }
 
         [Test]
-        //[TestMethod]
         public void TestResume()
         {
             var controller = new HomeController(); //Arrange

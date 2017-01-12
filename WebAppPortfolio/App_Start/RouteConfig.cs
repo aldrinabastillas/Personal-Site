@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using WebAppPortfolio.Classes;
 
 namespace WebAppPortfolio
 {
@@ -20,6 +18,17 @@ namespace WebAppPortfolio
                     controller = "Spotify",
                     action = "GetYearList",
                     year = DateTime.Now.Year - 2
+                }
+            );
+
+            routes.MapRoute(
+                name: "Resume",
+                url: "Home/Resume/{pathProvider}",
+                defaults: new
+                {
+                    controller = "Home",
+                    action = "Resume",
+                    pathProvider = new ServerPathProvider()
                 }
             );
 
