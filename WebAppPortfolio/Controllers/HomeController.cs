@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Web.Mvc;
 using WebAppPortfolio.Classes; //to get the EventLogger class
+using WebAppPortfolio.Interfaces;
 
 namespace WebAppPortfolio.Controllers
 {
@@ -27,12 +28,22 @@ namespace WebAppPortfolio.Controllers
 
         /// <summary>
         /// Download link for resume PDF
-        /// See https://msdn.microsoft.com/en-us/library/dd492593(v=vs.98).aspx
+        /// Uses a default argument of the ServerPathProvider implementation of IPathProvider
         /// </summary>
+        /// <returns></returns>
         public FileResult Resume()
         {
+            return Resume(new ServerPathProvider());
+        }
+
+        /// <summary>
+        /// Download link for resume PDF
+        /// See https://msdn.microsoft.com/en-us/library/dd492593(v=vs.98).aspx
+        /// </summary>
+        public FileResult Resume(IPathProvider pathProvider)
+        {
             string fileName = "Aldrin F Abastillas - Resume 2016.pdf";
-            string mapPath = Server.MapPath("~/Content/documents/" + fileName);
+            string mapPath = pathProvider.MapPath("~/Content/documents/" + fileName);
             return File(mapPath, System.Net.Mime.MediaTypeNames.Application.Pdf, fileName);
         }
 
