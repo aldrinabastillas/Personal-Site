@@ -95,9 +95,14 @@
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="StackExchange.Redis, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StackExchange.Redis.1.2.0\lib\net45\StackExchange.Redis.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
@@ -164,6 +169,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Classes\EventLogger.cs" />
+    <Compile Include="Classes\RedisCache.cs" />
+    <Compile Include="Classes\RedisSongList.cs" />
+    <Compile Include="Classes\SQLSongList.cs" />
     <Compile Include="Interfaces\IPathProvider.cs" />
     <Compile Include="Classes\ServerPathProvider.cs" />
     <Compile Include="Classes\SpotifyAPIs.cs" />
@@ -172,6 +180,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\ISongList.cs" />
     <Compile Include="Models\Billboard100Songs.cs">
       <DependentUpon>Billboard100SongsAzure.tt</DependentUpon>
     </Compile>

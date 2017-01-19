@@ -14,6 +14,10 @@ Notable files include:
   Returns the predictor app's page, calls the machine learning web service, and queries the database with Entity.
 * [WebAppPortfolio/Classes/SpotifyAPIs.cs](https://github.com/aldrinabastillas/Personal-Site/blob/master/WebAppPortfolio/Classes/SpotifyAPIs.cs):
   Wrappers around the Spotify Web APIs, that use asynchronous tasks to call them and Json.NET to deserialize the response.
+* [WebAppPortfolio/Classes/RedisSongList.cs](https://github.com/aldrinabastillas/Personal-Site/blob/master/WebAppPortfolio/Classes/RedisSongList.cs):
+  Implments the [ISongList interface](https://github.com/aldrinabastillas/Personal-Site/blob/master/WebAppPortfolio/Interfaces/ISongList.cs) querying
+  a Redis cache for a song list on a given year. On cache misses, queries the DB using the
+  [SQLSongList](https://github.com/aldrinabastillas/Personal-Site/blob/master/WebAppPortfolio/Classes/SQLSongList.cs) implementation of the interface.
 
 #### Markup
 * [WebAppPortfolio/Views/Shared/_Layout.cshtml](https://github.com/aldrinabastillas/Personal-Site/blob/master/WebAppPortfolio/Views/Shared/_Layout.cshtml):
@@ -51,6 +55,8 @@ and [link2](https://blogs.msdn.microsoft.com/andreasderuiter/2015/02/09/performa
 * How to create a client controller with AngularJS
 * How to resolve virtual directory paths when bundled CSS files link to other files in the solution
 * How to write to the Windows Event Log and to a trace file
+* How to write unit tests and use dependency injection
+* How to use a Redis cache to save from querying the database 
 
 #### Game Development 
 * How to use different programming paradigms like working with Unity's 
@@ -70,6 +76,8 @@ and [link2](https://blogs.msdn.microsoft.com/andreasderuiter/2015/02/09/performa
 * Web Services: [Microsoft Azure Machine Learning Studio](https://studio.azureml.net/), 
                 [Spotify Web API](https://developer.spotify.com/web-api/)
 * JavaScript Libraries: [jQuery](http://jquery.com/), [Json.NET](http://www.newtonsoft.com/json)
+* Unit-testing framework: [NUnit](https://www.nunit.org/)
+* Caching framework: [Azure Redis Cache](https://azure.microsoft.com/en-us/services/cache/)
 
 
 ## Future Enhancements

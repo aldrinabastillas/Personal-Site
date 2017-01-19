@@ -2,11 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using System.Web.Caching;
 using System.Web.Configuration;
 using System.Web.Mvc;
 using WebAppPortfolio.Classes;
@@ -26,12 +24,13 @@ namespace WebAppPortfolio.Controllers
         /// Caches the Spotify Web API access token and the page for 5 minutes
         /// </summary>
         /// <returns></returns>
-        [OutputCache(Duration = 300)]
+        #if (!DEBUG)
+                [OutputCache(Duration = 300)]
+        #endif
         public override ViewResult Index()
         {
-            //loads access token into cache
-            SpotifyAPIs.GetSpotifyAccessToken();
-            //logger = new EventLogger(); //unnecessary in Azure
+            SpotifyAPIs.GetSpotifyAccessToken(); //loads access token into runtime cache
+            //PreloadLists(); //async preload year lists
 
             return View("Index", "_Layout");
         }
@@ -49,7 +48,7 @@ namespace WebAppPortfolio.Controllers
             await Task.WhenAll(audioFeatures, trackYear);
 
             string response;
-            if(audioFeatures.Result != null && trackYear.Result != 0)
+            if (audioFeatures.Result != null && trackYear.Result != 0)
             {
                 var scoreRequest = PredictionRequest.CreateRequest(audioFeatures.Result, trackYear.Result);
                 response = await CallMlService(scoreRequest);
@@ -70,27 +69,29 @@ namespace WebAppPortfolio.Controllers
         /// <returns></returns>
         public JsonResult GetYearList(int year)
         {
-            var list = new List<Billboard100Songs>();
-            var connectionString = WebConfigurationManager.ConnectionStrings;
-            using(var db = new Billboard100SongsAzure())
-            {
-                try
-                {
-                    list = (from songs in db.Billboard100
-                            where songs.Year == year
-                            select songs).OrderBy(s => s.Position).ToList();
-                }
-                catch(Exception ex)
-                {
-                    Console.WriteLine(ex.InnerException);
-                }
+            var redisLookup = new RedisSongList();
+            var list = redisLookup.GetYearList(year);
 
-            }
             return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// Asynchronously pre-load all year lists into the Redis cache 
+        /// </summary>
+        /// <returns></returns>
+        public EmptyResult PreloadLists()
+        {
+            Task<Dictionary<int, List<Billboard100Songs>>> t = Task.Run(() =>
+            {
+                var redisLookup = new RedisSongList();
+                return redisLookup.GetAllYearLists();
+            });
+
+            return null;
         }
         #endregion
 
-        #region Private Machine Learning Methods
+        #region Private Methods
         /// <summary>
         /// Calls the machine learning web service
         /// See https://docs.microsoft.com/en-us/azure/machine-learning/machine-learning-consume-web-services#request-response-service-rrs

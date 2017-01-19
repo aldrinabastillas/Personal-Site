@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Web.Mvc;
-using WebAppPortfolio.Classes; //to get the EventLogger class
+using WebAppPortfolio.Classes; 
 using WebAppPortfolio.Interfaces;
 
 namespace WebAppPortfolio.Controllers

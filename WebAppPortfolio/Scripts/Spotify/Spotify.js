@@ -1,4 +1,5 @@
 ﻿var spotifyApp = angular.module('spotifyApp', []);
+var mostRecentList = 2015;
 
 spotifyApp.run(function () {
     $('table').tablesort(); //sets up a sortable table, see http://semantic-ui.com/collections/table.html#sortable
@@ -11,6 +12,8 @@ spotifyApp.run(function () {
             $(this).children('span').attr('class', 'panelArrow glyphicon glyphicon-chevron-up');
         }
     });
+
+    $.get('PreloadLists/');
 });
 
 spotifyApp.controller('SpotifyController', ['$scope', '$http', function ($scope, $http) {
@@ -19,9 +22,9 @@ spotifyApp.controller('SpotifyController', ['$scope', '$http', function ($scope,
     //populate year dropdown
     spotify.availableYears = [];
     var currentYear = new Date().getFullYear();
-    for (i = currentYear - 1; i >= 1946; i--) {
+    for (i = mostRecentList; i >= 1946; i--) {
         spotify.availableYears.push(i);
-    };
+    }
     spotify.selectedYear = spotify.availableYears[0]; //default in the most recent year
 
     //free text search songs in Spotify
@@ -44,7 +47,7 @@ spotifyApp.controller('SpotifyController', ['$scope', '$http', function ($scope,
                     });
                 });
                 return response;
-            },
+            }
         },
         fields: { //map results from Spotify to Semantic-UI API
             results: 'results',
@@ -82,7 +85,7 @@ spotifyApp.controller('SpotifyController', ['$scope', '$http', function ($scope,
 
                 if (label == 'False') {
                     probability = 100 - probability; //Given probability is that the label is True, so flip if False
-                    prediction = 'not likely'
+                    prediction = 'not likely';
                 }
 
                 $scope.prediction = prediction;
@@ -99,7 +102,7 @@ spotifyApp.controller('SpotifyController', ['$scope', '$http', function ($scope,
     spotify.billboardListCache = {}; //save lists that were already loaded
     spotify.billboardSongs = [];
     spotify.getYearList = function (selectedYear) {
-        //first check cache
+        //first check local cache
         if (spotify.billboardListCache[selectedYear] !== undefined) {
             spotify.billboardSongs = spotify.billboardListCache[selectedYear];
         }

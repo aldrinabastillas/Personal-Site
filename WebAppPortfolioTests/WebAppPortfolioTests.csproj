@@ -62,8 +62,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Classes\TestPathProvider.cs" />
+    <Compile Include="ClassesTests\SpotifyAPIsTest.cs" />
+    <Compile Include="MockClasses\TestPathProvider.cs" />
     <Compile Include="ControllerTests\HomeControllerTests.cs" />
+    <Compile Include="ControllerTests\SpotifyControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
