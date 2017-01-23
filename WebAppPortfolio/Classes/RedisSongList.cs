@@ -10,9 +10,17 @@ namespace WebAppPortfolio.Classes
     public class RedisSongList : ISongList
     {
         #region Redis Cache Connections
-        private static IDatabase Cache = RedisCache.Cache;
-        private static IServer Server = RedisCache.Server;
+        private static IDatabase Cache { get; set; }
+        private static IServer Server { get; set; }
+        public static DBSongList DbLookup { get; set; }
         #endregion
+
+        public RedisSongList(DBSongList db)
+        {
+            Cache = RedisCache.Cache;
+            Server = RedisCache.Server;
+            DbLookup = db;
+        }
 
         #region Interface Methods
         /// <summary>
@@ -34,8 +42,7 @@ namespace WebAppPortfolio.Classes
             else
             {
                 //not in cache, get from DB and store in cache
-                var sqlLookup = new SQLSongList();
-                list = sqlLookup.GetYearList(year);
+                list = DbLookup.GetYearList(year);
 
                 Cache.StringSet(cacheKey, JsonConvert.SerializeObject(list));
             }
@@ -70,8 +77,7 @@ namespace WebAppPortfolio.Classes
             //if all lists aren't loaded, get all from DB and cache
             if (lists.Keys.Count < 70) //TODO: Don't hard code the count of lists
             {
-                var sqlLookup = new SQLSongList();
-                lists = sqlLookup.GetAllYearLists();
+                lists = DbLookup.GetAllYearLists();
 
                 foreach (var year in lists.Keys)
                 {

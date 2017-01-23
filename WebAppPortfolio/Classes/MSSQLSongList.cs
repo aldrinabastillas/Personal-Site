@@ -8,10 +8,19 @@ using WebAppPortfolio.Models;
 
 namespace WebAppPortfolio.Classes
 {
-    public class SQLSongList : ISongList
+    /// <summary>
+    /// Implements the DBSongList abstract class, which implements the ISongList interface
+    /// </summary>
+    public class MSSQLSongList : DBSongList
     {
         #region Connection
-        private ConnectionStringSettingsCollection connection = WebConfigurationManager.ConnectionStrings;
+        protected override ConnectionStringSettingsCollection connection
+        {
+            get
+            {
+                return WebConfigurationManager.ConnectionStrings;
+            }
+        }
         #endregion
 
         #region Interface Methods
@@ -21,7 +30,7 @@ namespace WebAppPortfolio.Classes
         /// </summary>
         /// <param name="year"></param>
         /// <returns></returns>
-        public List<Billboard100Songs> GetYearList(int year)
+        public override List<Billboard100Songs> GetYearList(int year)
         {
             var list = new List<Billboard100Songs>();
             using (var db = new Billboard100SongsAzure())
@@ -47,7 +56,7 @@ namespace WebAppPortfolio.Classes
         /// </summary>
         /// <param name="year"></param>
         /// <returns>Dictionary where key = year, value = list of songs and artist ordered by chart position</returns>
-        public Dictionary<int, List<Billboard100Songs>> GetAllYearLists()
+        public override Dictionary<int, List<Billboard100Songs>> GetAllYearLists()
         {
             var lists = new Dictionary<int, List<Billboard100Songs>>();
             using (var db = new Billboard100SongsAzure())
