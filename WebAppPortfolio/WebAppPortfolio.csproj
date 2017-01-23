@@ -168,10 +168,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Classes\DBSongList.cs" />
     <Compile Include="Classes\EventLogger.cs" />
     <Compile Include="Classes\RedisCache.cs" />
     <Compile Include="Classes\RedisSongList.cs" />
-    <Compile Include="Classes\SQLSongList.cs" />
+    <Compile Include="Classes\MSSQLSongList.cs" />
     <Compile Include="Interfaces\IPathProvider.cs" />
     <Compile Include="Classes\ServerPathProvider.cs" />
     <Compile Include="Classes\SpotifyAPIs.cs" />

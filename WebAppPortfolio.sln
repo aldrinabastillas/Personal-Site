@@ -5,7 +5,14 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppPortfolio", "WebAppPortfolio\WebAppPortfolio.csproj", "{853054AC-255B-4BFA-BD48-969148C55EAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppPortfolioTests", "WebAppPortfolioTests\WebAppPortfolioTests.csproj", "{19189545-6900-4D53-9837-64CF3CF36E43}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppPortfolioUnitTests", "WebAppPortfolioTests\WebAppPortfolioUnitTests.csproj", "{19189545-6900-4D53-9837-64CF3CF36E43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppPortfolioPerfTests", "WebAppPortfolioPerfTests\WebAppPortfolioPerfTests.csproj", "{2C57BEC0-EE63-409A-86AF-C402F9B1B482}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BD2888A2-E095-4877-B2A1-F23E16E6A0E4}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +28,10 @@ Global
 		{19189545-6900-4D53-9837-64CF3CF36E43}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19189545-6900-4D53-9837-64CF3CF36E43}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19189545-6900-4D53-9837-64CF3CF36E43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C57BEC0-EE63-409A-86AF-C402F9B1B482}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C57BEC0-EE63-409A-86AF-C402F9B1B482}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C57BEC0-EE63-409A-86AF-C402F9B1B482}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C57BEC0-EE63-409A-86AF-C402F9B1B482}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

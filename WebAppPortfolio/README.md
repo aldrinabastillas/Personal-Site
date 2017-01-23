@@ -49,14 +49,15 @@ and [link2](https://blogs.msdn.microsoft.com/andreasderuiter/2015/02/09/performa
 * A more in depth discussion can be found in the panels at the bottom of the [app](http://aldrinabastillas.com/Spotify/Index)
 
 #### Web apps
-* How to use asynchronous tasks to consume web services
-* How to work with HTML headers
-* How to customize SQL connection strings for local debugging and release on the Azure cloud
-* How to create a client controller with AngularJS
-* How to resolve virtual directory paths when bundled CSS files link to other files in the solution
-* How to write to the Windows Event Log and to a trace file
-* How to write unit tests and use dependency injection
-* How to use a Redis cache to save from querying the database 
+* Using asynchronous tasks to consume web services
+* Working with HTML headers
+* Customizing SQL connection strings for local debugging and release on the Azure cloud
+* Creating a client controller with AngularJS
+* Resolving virtual directory paths when bundled CSS files link to other files in the solution
+* Writing to the Windows Event Log and to a trace file
+* Writing unit tests and using dependency injection
+* Using a Redis cache to save from querying the database 
+* Writing performance web tests
 
 #### Game Development 
 * How to use different programming paradigms like working with Unity's 

@@ -15,7 +15,7 @@ namespace WebAppPortfolio.Controllers
     public class SpotifyController : HomeController
     {
         #region Properties
-        private static EventLogger logger { get; set; }
+        private static EventLogger Logger { get; set; }
         #endregion
 
         #region Public Actions
@@ -30,7 +30,6 @@ namespace WebAppPortfolio.Controllers
         public override ViewResult Index()
         {
             SpotifyAPIs.GetSpotifyAccessToken(); //loads access token into runtime cache
-            //PreloadLists(); //async preload year lists
 
             return View("Index", "_Layout");
         }
@@ -69,7 +68,7 @@ namespace WebAppPortfolio.Controllers
         /// <returns></returns>
         public JsonResult GetYearList(int year)
         {
-            var redisLookup = new RedisSongList();
+            var redisLookup = new RedisSongList(new MSSQLSongList());
             var list = redisLookup.GetYearList(year);
 
             return Json(list, JsonRequestBehavior.AllowGet);
@@ -77,13 +76,14 @@ namespace WebAppPortfolio.Controllers
 
         /// <summary>
         /// Asynchronously pre-load all year lists into the Redis cache 
+        /// Gets called upon page load in Spotify.js
         /// </summary>
         /// <returns></returns>
         public EmptyResult PreloadLists()
         {
             Task<Dictionary<int, List<Billboard100Songs>>> t = Task.Run(() =>
             {
-                var redisLookup = new RedisSongList();
+                var redisLookup = new RedisSongList(new MSSQLSongList());
                 return redisLookup.GetAllYearLists();
             });
 
@@ -91,7 +91,7 @@ namespace WebAppPortfolio.Controllers
         }
         #endregion
 
-        #region Private Methods
+        #region Non-Public Methods
         /// <summary>
         /// Calls the machine learning web service
         /// See https://docs.microsoft.com/en-us/azure/machine-learning/machine-learning-consume-web-services#request-response-service-rrs
@@ -120,12 +120,25 @@ namespace WebAppPortfolio.Controllers
             }
             return result;
         }
+
+        /// <summary>
+        /// Testing method that reads directly from the DB without caching
+        /// </summary>
+        /// <param name="year"></param>
+        /// <returns></returns>
+        public JsonResult GetYearListFromSQL(int year)
+        {
+            var sqlLookup = new MSSQLSongList();
+            var list = sqlLookup.GetYearList(year);
+
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         #region Error Handlers
         protected override void OnException(ExceptionContext exceptionContext)
         {
-            base.OnException(exceptionContext); //call handler in HomeController
+            base.OnException(exceptionContext); //call base handler in HomeController
         }
         #endregion
 

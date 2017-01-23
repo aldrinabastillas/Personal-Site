@@ -13,7 +13,7 @@ spotifyApp.run(function () {
         }
     });
 
-    $.get('PreloadLists/');
+    //$.get('PreloadLists/'); //loads the redis cache with all year lists
 });
 
 spotifyApp.controller('SpotifyController', ['$scope', '$http', function ($scope, $http) {
