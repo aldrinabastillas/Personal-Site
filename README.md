@@ -58,6 +58,7 @@ and [link2](https://blogs.msdn.microsoft.com/andreasderuiter/2015/02/09/performa
 * Writing unit tests and using dependency injection
 * Using a Redis cache to save from querying the database 
 * Writing performance web tests
+* Deploying an app and database on Windows Azure and Amazon Elastic Beanstalk 
 
 #### Game Development 
 * How to use different programming paradigms like working with Unity's 
