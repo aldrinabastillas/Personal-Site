@@ -15,10 +15,10 @@ namespace WebAppPortfolio.Classes
         public static DBSongList DbLookup { get; set; }
         #endregion
 
-        public RedisSongList(DBSongList db)
+        public RedisSongList(DBSongList db, RedisCache cache)
         {
-            Cache = RedisCache.Cache;
-            Server = RedisCache.Server;
+            Cache = cache.Cache;
+            Server = cache.Server;
             DbLookup = db;
         }
 
