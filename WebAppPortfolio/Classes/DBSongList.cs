@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
 using System.Web.Configuration;
 using WebAppPortfolio.Interfaces;
@@ -13,7 +12,13 @@ namespace WebAppPortfolio.Classes
     public abstract class DBSongList : ISongList
     {
         #region Connection
-        protected abstract ConnectionStringSettingsCollection connection { get; }
+        protected virtual ConnectionStringSettingsCollection connection
+        {
+            get
+            {
+                return WebConfigurationManager.ConnectionStrings;
+            }
+        }
         #endregion
 
         #region Interface Methods

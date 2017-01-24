@@ -22,12 +22,23 @@ namespace WebAppPortfolio
             );
 
             routes.MapRoute(
-                name: "GetYearListFromSQL",
-                url: "Spotify/GetYearListFromSQL/{year}",
+                name: "GetYearListFromAws",
+                url: "Spotify/GetYearListFromAws/{year}",
                 defaults: new
                 {
                     controller = "Spotify",
-                    action = "GetYearListFromSQL",
+                    action = "GetYearListFromAws",
+                    year = DateTime.Now.Year - 2
+                }
+            );
+
+            routes.MapRoute(
+                name: "GetYearListFromAzure",
+                url: "Spotify/GetYearListFromAzure/{year}",
+                defaults: new
+                {
+                    controller = "Spotify",
+                    action = "GetYearListFromAzure",
                     year = DateTime.Now.Year - 2
                 }
             );

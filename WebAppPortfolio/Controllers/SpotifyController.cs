@@ -68,7 +68,8 @@ namespace WebAppPortfolio.Controllers
         /// <returns></returns>
         public JsonResult GetYearList(int year)
         {
-            var redisLookup = new RedisSongList(new MSSQLSongList());
+            //var redisLookup = new RedisSongList(new AzureSQLSongList());
+            var redisLookup = new RedisSongList(new AwsSQLSongList());
             var list = redisLookup.GetYearList(year);
 
             return Json(list, JsonRequestBehavior.AllowGet);
@@ -83,7 +84,7 @@ namespace WebAppPortfolio.Controllers
         {
             Task<Dictionary<int, List<Billboard100Songs>>> t = Task.Run(() =>
             {
-                var redisLookup = new RedisSongList(new MSSQLSongList());
+                var redisLookup = new RedisSongList(new AwsSQLSongList());
                 return redisLookup.GetAllYearLists();
             });
 
@@ -122,15 +123,34 @@ namespace WebAppPortfolio.Controllers
         }
 
         /// <summary>
-        /// Testing method that reads directly from the DB without caching
+        /// Testing method that reads directly from the DB in Azure without caching
         /// </summary>
         /// <param name="year"></param>
         /// <returns></returns>
-        public JsonResult GetYearListFromSQL(int year)
+        public JsonResult GetYearListFromAzure(int year)
         {
-            var sqlLookup = new MSSQLSongList();
-            var list = sqlLookup.GetYearList(year);
+            return GetYearListFromDb(new AzureSQLSongList(), year);
+        }
 
+        /// <summary>
+        /// Testing method that reads directly from the DB in AWS without caching
+        /// </summary>
+        /// <param name="year"></param>
+        /// <returns></returns>
+        public JsonResult GetYearListFromAws(int year)
+        {
+            return GetYearListFromDb(new AwsSQLSongList(), year);
+        }
+
+        /// <summary>
+        /// Testing method that reads directly from the specified DB without caching
+        /// </summary>
+        /// <param name="db"></param>
+        /// <param name="year"></param>
+        /// <returns></returns>
+        private JsonResult GetYearListFromDb(DBSongList db, int year)
+        {
+            var list = db.GetYearList(year);
             return Json(list, JsonRequestBehavior.AllowGet);
         }
         #endregion

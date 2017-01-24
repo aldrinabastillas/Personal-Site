@@ -11,22 +11,12 @@ namespace WebAppPortfolio.Classes
     /// <summary>
     /// Implements the DBSongList abstract class, which implements the ISongList interface
     /// </summary>
-    public class MSSQLSongList : DBSongList
+    public class AzureSQLSongList : DBSongList
     {
-        #region Connection
-        protected override ConnectionStringSettingsCollection connection
-        {
-            get
-            {
-                return WebConfigurationManager.ConnectionStrings;
-            }
-        }
-        #endregion
-
         #region Interface Methods
         /// <summary>
         /// Gets a list of Billboard Hot 100 songs from a given year
-        /// from the SQL DB using Entity
+        /// from the SQL DB in Azure using Entity
         /// </summary>
         /// <param name="year"></param>
         /// <returns></returns>
@@ -52,7 +42,7 @@ namespace WebAppPortfolio.Classes
 
         /// <summary>
         /// Gets a list of Billboard Hot 100 songs for all years
-        /// from the SQL DB using Entity
+        /// from the SQL DB in Azure using Entity
         /// </summary>
         /// <param name="year"></param>
         /// <returns>Dictionary where key = year, value = list of songs and artist ordered by chart position</returns>

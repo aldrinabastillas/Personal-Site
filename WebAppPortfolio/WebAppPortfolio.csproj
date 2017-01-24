@@ -168,11 +168,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Classes\AwsSQLSongList.cs" />
     <Compile Include="Classes\DBSongList.cs" />
     <Compile Include="Classes\EventLogger.cs" />
+    <Compile Include="Classes\AzureSQLSongList.cs" />
     <Compile Include="Classes\RedisCache.cs" />
     <Compile Include="Classes\RedisSongList.cs" />
-    <Compile Include="Classes\MSSQLSongList.cs" />
     <Compile Include="Interfaces\IPathProvider.cs" />
     <Compile Include="Classes\ServerPathProvider.cs" />
     <Compile Include="Classes\SpotifyAPIs.cs" />
@@ -183,7 +184,17 @@
     </Compile>
     <Compile Include="Interfaces\ISongList.cs" />
     <Compile Include="Models\Billboard100Songs.cs">
-      <DependentUpon>Billboard100SongsAzure.tt</DependentUpon>
+      <DependentUpon>Billboard100SongsAWS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Billboard100SongsAWS.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Billboard100SongsAWS.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Billboard100SongsAWS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Billboard100SongsAWS.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Billboard100SongsAzure.Context.cs">
       <AutoGen>True</AutoGen>
@@ -229,6 +240,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Spotify.css" />
+    <Content Include="Models\Billboard100SongsAWS.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Billboard100SongsAWS.edmx</DependentUpon>
+      <LastGenOutput>Billboard100SongsAWS.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Billboard100SongsAWS.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Billboard100SongsAWS.edmx</DependentUpon>
+      <LastGenOutput>Billboard100SongsAWS.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\Billboard100SongsAzure.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Billboard100SongsAzure.edmx</DependentUpon>
@@ -269,6 +290,13 @@
       <DependentUpon>Billboard100SongsAzure.edmx</DependentUpon>
     </Content>
     <Content Include="Content\documents\Aldrin F Abastillas - Resume 2016.pdf" />
+    <EntityDeploy Include="Models\Billboard100SongsAWS.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Billboard100SongsAWS.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Billboard100SongsAWS.edmx.diagram">
+      <DependentUpon>Billboard100SongsAWS.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\aldrinabastillas.pubxml" />
     <Content Include="README.md" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />

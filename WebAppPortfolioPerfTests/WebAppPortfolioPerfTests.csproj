@@ -53,13 +53,19 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="GetYearListFromSQLWebTest.webtest">
+    <None Include="AwsSqlLoadTest.loadtest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="LocalMSSQLLoadTest.loadtest">
+    <None Include="GetYearListFromAwsWebTest.webtest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="LocalRedisLoadTest.loadtest">
+    <None Include="GetYearListFromAzureWebTest.webtest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="AzureSqlLoadTest.loadtest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="RedisLoadTest.loadtest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="GetYearListWebTest.webtest">
