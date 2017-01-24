@@ -174,8 +174,10 @@
     <Compile Include="Classes\AzureRedisCache.cs" />
     <Compile Include="Classes\EventLogger.cs" />
     <Compile Include="Classes\RedisSongList.cs" />
+    <Compile Include="Classes\AzureSQLSongList.cs" />
     <Compile Include="Classes\ServerPathProvider.cs" />
     <Compile Include="Classes\SpotifyAPIs.cs" />
+    <Compile Include="Classes\AwsSQLSongList.cs" />
     <Compile Include="Interfaces\IPathProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SpotifyController.cs" />

@@ -68,8 +68,8 @@ namespace WebAppPortfolio.Controllers
         /// <returns></returns>
         public JsonResult GetYearList(int year)
         {
-            //var redisLookup = new RedisSongList(new AzureSQLSongList());
-            var redisLookup = new RedisSongList(new AwsSQLSongList());
+            //var redisLookup = new RedisSongList(new AzureSQLSongList(), new AzureRedisCache());
+            var redisLookup = new RedisSongList(new AwsSQLSongList(), new AwsRedisCache());
             var list = redisLookup.GetYearList(year);
 
             return Json(list, JsonRequestBehavior.AllowGet);
@@ -84,7 +84,7 @@ namespace WebAppPortfolio.Controllers
         {
             Task<Dictionary<int, List<Billboard100Songs>>> t = Task.Run(() =>
             {
-                var redisLookup = new RedisSongList(new AwsSQLSongList());
+                var redisLookup = new RedisSongList(new AwsSQLSongList(), new AwsRedisCache());
                 return redisLookup.GetAllYearLists();
             });
 
