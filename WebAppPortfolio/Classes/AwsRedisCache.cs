@@ -2,19 +2,24 @@
 
 namespace WebAppPortfolio.Classes
 {
+    /// <summary>
+    /// Implements the RedisCache abstract class
+    /// </summary>
     public class AwsRedisCache : RedisCache
     {
+        /// <summary>
+        /// Calls the base constructor with the specified app settings key (see Web.config)
+        /// </summary>
         public AwsRedisCache() : base("AwsRedisCacheConnection")
         {
         }
 
-        public override IServer Server
-        {
-            get
-            {
-                var servers = Connection.GetEndPoints();
-                return Connection.GetServer(servers[0]); //currently only 1 Redis server end point configured, could change with clustering
-            }
-        }
+        /// <summary>
+        /// May need to override if adding Redis nodes
+        /// </summary>
+        //public override IServer Server
+        //{
+            
+        //}
     }
 }

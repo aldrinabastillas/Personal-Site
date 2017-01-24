@@ -33,6 +33,13 @@ namespace WebAppPortfolio.Classes
             }
         }
 
-        public virtual IServer Server { get; }
+        public virtual IServer Server
+        {
+            get
+            {
+                var servers = Connection.GetEndPoints();
+                return Connection.GetServer(servers[0]); //currently only 1 Redis server end point configured, could change with clustering
+            }
+        }
     }
 }

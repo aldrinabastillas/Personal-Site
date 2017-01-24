@@ -243,3 +243,4 @@ ModelManifest.xml
 WebAppPortfolio/Web.config
 WebAppPortfolio/favicon.ico
 *.config
+*.pubxml

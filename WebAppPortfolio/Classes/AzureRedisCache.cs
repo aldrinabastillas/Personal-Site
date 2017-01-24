@@ -4,18 +4,11 @@ namespace WebAppPortfolio.Classes
 {
     public class AzureRedisCache : RedisCache
     {
+        /// <summary>
+        /// Implements the RedisCache abstract class
+        /// </summary>
         public AzureRedisCache() : base("AzureRedisCacheConnection")
         {
         }
-        
-        public override IServer Server
-        {
-            get
-            {
-                var servers = Connection.GetEndPoints(); 
-                return Connection.GetServer(servers[0]); //currently only 1 Redis server end point configured
-            }
-        }
-
     }
 }
