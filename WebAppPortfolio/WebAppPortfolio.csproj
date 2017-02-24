@@ -213,30 +213,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Home.css" />
     <Content Include="Content\images\billboard.jpg" />
     <Content Include="Content\images\alaska.jpg" />
     <Content Include="Content\images\visualizer.gif" />
     <Content Include="Content\images\madison.jpg" />
-    <Content Include="Content\Semantic-UI\components\icon.css" />
-    <Content Include="Content\Semantic-UI\components\icon.min.css" />
-    <Content Include="Content\Semantic-UI\components\input.css" />
-    <Content Include="Content\Semantic-UI\components\input.min.css" />
-    <Content Include="Content\Semantic-UI\components\search.css" />
-    <Content Include="Content\Semantic-UI\components\search.js" />
-    <Content Include="Content\Semantic-UI\components\search.min.css" />
-    <Content Include="Content\Semantic-UI\components\search.min.js" />
-    <Content Include="Content\Semantic-UI\components\table.css" />
-    <Content Include="Content\Semantic-UI\components\table.min.css" />
-    <Content Include="Content\Semantic-UI\semantic.css" />
-    <Content Include="Content\Semantic-UI\semantic.js" />
-    <Content Include="Content\Semantic-UI\semantic.min.css" />
-    <Content Include="Content\Semantic-UI\semantic.min.js" />
-    <Content Include="Content\Semantic-UI\themes\default\assets\fonts\icons.svg" />
     <Content Include="Content\_Visualizer.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -262,8 +243,6 @@
       <DependentUpon>Billboard100SongsAzure.edmx</DependentUpon>
       <LastGenOutput>Billboard100SongsAzure.cs</LastGenOutput>
     </Content>
-    <Content Include="Scripts\ai.0.22.19-build00125.js" />
-    <Content Include="Scripts\ai.0.22.19-build00125.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -271,19 +250,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Scripts\angular.js" />
-    <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\errors.json" />
-    <Content Include="Scripts\angular.min.js.map" />
-    <Content Include="Content\Semantic-UI\themes\default\assets\fonts\icons.eot" />
-    <Content Include="Content\Semantic-UI\themes\default\assets\fonts\icons.otf" />
-    <Content Include="Content\Semantic-UI\themes\default\assets\fonts\icons.ttf" />
-    <Content Include="Content\Semantic-UI\themes\default\assets\fonts\icons.woff" />
-    <Content Include="Content\Semantic-UI\themes\default\assets\fonts\icons.woff2" />
     <EntityDeploy Include="Models\Billboard100SongsAzure.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Billboard100SongsAzure.Designer.cs</LastGenOutput>
@@ -291,7 +258,6 @@
     <Content Include="Models\Billboard100SongsAzure.edmx.diagram">
       <DependentUpon>Billboard100SongsAzure.edmx</DependentUpon>
     </Content>
-    <Content Include="Content\documents\Aldrin F Abastillas - Resume 2016.pdf" />
     <EntityDeploy Include="Models\Billboard100SongsAWS.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Billboard100SongsAWS.Designer.cs</LastGenOutput>
@@ -299,29 +265,14 @@
     <Content Include="Models\Billboard100SongsAWS.edmx.diagram">
       <DependentUpon>Billboard100SongsAWS.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\documents\Aldrin F Abastillas - Resume 2017.docx" />
+    <None Include="Properties\PublishProfiles\aldrinabastillas - Web Deploy %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\aldrinabastillas - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\aldrinabastillas.pubxml" />
     <Content Include="README.md" />
     <None Include="Properties\PublishProfiles\Local File.pubxml" />
-    <None Include="Scripts\jquery-3.1.1.intellisense.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Home.js" />
-    <Content Include="Scripts\jquery-3.1.1.js" />
-    <Content Include="Scripts\jquery-3.1.1.min.js" />
-    <Content Include="Scripts\jquery-3.1.1.slim.js" />
-    <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\respond.js" />
-    <Content Include="Scripts\respond.matchmedia.addListener.js" />
-    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
-    <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\Spotify\tablesort.js" />
-    <Content Include="Scripts\startswith.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Scripts\Spotify\Spotify.js" />
     <Content Include="Web.config">
@@ -348,8 +299,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.1.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
