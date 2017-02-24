@@ -25,13 +25,13 @@ namespace WebAppPortfolio
                       "~/Vendor/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Vendor/bootstrap.css",
                       "~/Content/Spotify.css",
                       "~/Content/_Visualizer.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/SpotifyPage").Include(
                       "~/Vendor/angular.js",  //must come before Spotify.js
-                      "~/Content/Semantic-UI/semantic.js",
+                      "~/Vendor/Semantic-UI/semantic.js",
                       "~/Scripts/Spotify/Spotify.js",
                       "~/Scripts/Spotify/tablesort.js"));
 
