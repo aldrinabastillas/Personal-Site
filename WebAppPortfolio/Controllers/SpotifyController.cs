@@ -68,8 +68,8 @@ namespace WebAppPortfolio.Controllers
         /// <returns></returns>
         public JsonResult GetYearList(int year)
         {
-            //var redisLookup = new RedisSongList(new AzureSQLSongList(), new AzureRedisCache());
-            var redisLookup = new RedisSongList(new AwsSQLSongList(), new AwsRedisCache());
+            var redisLookup = new RedisSongList(new AzureSQLSongList(), new AzureRedisCache());
+            // var redisLookup = new RedisSongList(new AwsSQLSongList(), new AwsRedisCache());
             var list = redisLookup.GetYearList(year);
 
             return Json(list, JsonRequestBehavior.AllowGet);
@@ -107,6 +107,8 @@ namespace WebAppPortfolio.Controllers
                 client.BaseAddress = new Uri(WebConfigurationManager.AppSettings["F1ModelUri"] + "&format=swagger");
                 string apiKey = WebConfigurationManager.AppSettings["F1ModelApiKey"];
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
+
+                //string test = Newtonsoft.Json.JsonConvert.SerializeObject(request);
 
                 HttpResponseMessage response = await client.PostAsJsonAsync("", request).ConfigureAwait(false);
                 if (response.IsSuccessStatusCode)

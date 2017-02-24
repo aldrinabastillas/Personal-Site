@@ -27,15 +27,15 @@ namespace WebAppPortfolio.Controllers
         }
 
         /// <summary>
-        /// Download link for resume PDF
+        /// Download link for resume 
         /// See https://msdn.microsoft.com/en-us/library/dd492593(v=vs.98).aspx
         /// Uses ServerPathProvider implementation of IPathProvider in RouteConfig.cs
         /// </summary>
         public FileResult Resume(IPathProvider pathProvider)
         {
-            string fileName = "Aldrin F Abastillas - Resume 2016.pdf";
+            string fileName = "Aldrin F Abastillas - Resume 2017.docx";
             string mapPath = pathProvider.MapPath("~/Content/documents/" + fileName);
-            return File(mapPath, System.Net.Mime.MediaTypeNames.Application.Pdf, fileName);
+            return File(mapPath, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", fileName);
         }
 
         /// <summary>
